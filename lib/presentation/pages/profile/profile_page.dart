@@ -19,6 +19,7 @@ class ProfilePage extends ConsumerWidget {
     return DefaultTabController(
       length: tabbar.length,
       child: Scaffold(
+        backgroundColor: AppColors.white,
         body: SafeArea(
           child: Consumer(builder: (context, ref, child) {
             // can be switch only main section but not save offset of list

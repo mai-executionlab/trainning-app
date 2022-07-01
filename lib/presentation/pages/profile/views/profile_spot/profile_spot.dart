@@ -10,9 +10,7 @@ class ProfileSpot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String img =
-        'https://s3-alpha-sig.figma.com/img/b4e2/f648/aad0d867023f5e294ac5862683d16fc0?Expires=1657497600&Signature=DlS0aMlEIOjPDCEL66z5m~zKNqoydl~CyWnaR~BJq2PeNnL4uzwX1sGS63oWyj1ELNhnZNPUImfXwmYLhVRc1ex7btW5~LOczqhg5O~0Rwxw8OyNNwWB2aLRwH-85snakhsBVSsAJd-oygy0uv2~lPZOitrHIghhny6gF19YxtUlcrIvVPhjkz5Xz-MQ8eNY2bAojXhV6DpCEsfBaNGSaon6AP9YqzmlmYDXBc9PfUTfe~rf49b38NdyRYIOysGbiwhcFxkk~GpRHDvsMX34KmliC7bbxQLfaCHKcAz5sFDZgl-6rFbraLuk9u3Ir5fOO3NGPtUiqgKUBUp6edXv1A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
-    return Padding(
+     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: AppStyles.horizontalMargin),
       child: Column(

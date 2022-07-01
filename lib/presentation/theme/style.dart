@@ -38,6 +38,8 @@ class TextStyles {
       _small.copyWith(fontWeight: FontWeight.w700);
 
   //large size 16
+  static TextStyle get largRegular =>
+      _large.copyWith(fontWeight: FontWeight.w400);
   static TextStyle get largeBold =>
       _large.copyWith(fontWeight: FontWeight.w700);
 
