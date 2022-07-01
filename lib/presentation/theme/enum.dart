@@ -1,6 +1,12 @@
 import 'package:training_app/presentation/theme/assets.dart';
 
-enum ProfileTab { home, spot, skill, activity, photo }
+enum ProfileTab {
+  home,
+  spot,
+  skill,
+  activity,
+  photo,
+}
 
 extension ProfileTabExtension on ProfileTab {
   String get tabName {
@@ -18,7 +24,7 @@ extension ProfileTabExtension on ProfileTab {
     }
   }
 
-   String get tabIcon {
+  String get tabIcon {
     switch (this) {
       case ProfileTab.home:
         return AppAssets.home;

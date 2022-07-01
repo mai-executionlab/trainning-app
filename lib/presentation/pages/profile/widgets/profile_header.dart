@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_app/presentation/components/components.dart';
+import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProfileHeader extends StatelessWidget {
 
     const String cover =
         'https://s3-alpha-sig.figma.com/img/089f/a4c7/8b3c7a6da07b05c7c3020cc539ff0037?Expires=1657497600&Signature=g-Tz9EV~lncFq9QKg9prRMNSItxS1IAJ9M2DUpdJFPLrcpRtX831VuUCXSxEYCQmQhcqzFOcgZ11G5-mTzbKldUTol5WQV7GtOU988I4-lgXXYVPdbLW3yqdWMgZKcN24l2FbEZ8vOOgs7n67wc-0aiSbZRPoKeQVasRK~IsTw3UFXzB2Acy14RC~4fdCnz3kE48Ie5W3nww5ioE8vnvE8QllTBIehLhOfJPTJ~QOlbW1djDlUYN0FtG8vJCxogF8ETu9nYznpPHc3aJcGdk3zuxGNP2OPyra74ivmfhWDA6uIDeuyaKTkIMvnlFtsuBiMjM4VKpyIWzTfk2zwAhtg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
-    
+
     return Stack(children: [
       Positioned.fill(
         child: CustomPaint(
@@ -57,19 +57,60 @@ class ProfileHeader extends StatelessWidget {
             height: 1,
             thickness: 1,
           ),
+          ///////////////language toggle button
           Align(
-            // toggle button
             alignment: Alignment.centerRight,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              margin: const EdgeInsets.only(right: AppStyles.horizontalMargin),
-              child: Container(
-                height: 28,
-                width: 71 * 2,
-                color: AppColors.white,
-              ),
+              // padding: const EdgeInsets.symmetric(vertical: 20),
+              margin: const EdgeInsets.symmetric(
+                  horizontal: AppStyles.horizontalMargin, vertical: 20),
+              height: 28,
+              width: 71 * 2,
+              decoration: ShapeDecoration(
+                  color: AppColors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4))),
+              child: Consumer(builder: (context, ref, child) {
+                return ToggleButtons(
+                    // borderColor: AppColors.white,
+                    onPressed: (index) {
+                      final current = ref.watch(toggleLanguageController);
+                      if (!current[index]) {
+                        ref.read(toggleLanguageController.state).state =
+                            current.reversed.toList();
+                      }
+                    },
+                    isSelected: ref.watch(toggleLanguageController),
+                    renderBorder: false,
+                    selectedColor: AppColors.white,
+                    fillColor: AppColors.black,
+                    color: const Color(0xFF666666),
+                    borderRadius: BorderRadius.circular(4),
+                    children: [
+                      SizedBox(
+                        width: 71,
+                        child: Center(
+                          child: Text(
+                            '日本語',
+                            style: TextStyles.smallBold.copyWith(fontSize: 13),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 71,
+                        child: Center(
+                          child: Text(
+                            'English',
+                            style:
+                                TextStyles.smallRegular.copyWith(fontSize: 13),
+                          ),
+                        ),
+                      )
+                    ]);
+              }),
             ),
           ),
+          ///////////////end language toggle button
           Stack(
             fit: StackFit.loose,
             children: [
@@ -124,9 +165,8 @@ class ProfileHeader extends StatelessWidget {
                           ),
                           Text(
                             'プロフィール編集',
-                            style: TextStyles.smallRegular.copyWith(
-                                // backgroundColor: AppColors.primaryColor,
-                                height: 1),
+                            style: TextStyles.smallRegular
+                                .copyWith(color: AppColors.black1, height: 1),
                           )
                         ]),
                         onPressed: () {}),

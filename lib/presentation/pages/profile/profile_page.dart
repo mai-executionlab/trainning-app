@@ -58,7 +58,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           child: Center(child: Consumer(builder: (context, ref, _) {
             return TabBar(
-              indicatorColor: AppColors.white,
+              indicatorColor: Colors.transparent,
               labelStyle: TextStyles.smallBold,
               labelColor: AppColors.customizeFG,
               unselectedLabelColor: AppColors.customizeFG.withOpacity(0.5),

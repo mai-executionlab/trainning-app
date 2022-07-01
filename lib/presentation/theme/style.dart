@@ -3,17 +3,25 @@ import 'package:training_app/presentation/theme/colors.dart';
 
 class TextStyles {
   TextStyles._();
-  static const TextStyle _small =
-      TextStyle(fontSize: 12, color: AppColors.black);
+  static const TextStyle _small = TextStyle(
+    fontSize: 12,
+    fontFamily: 'NotoSanJP',
+  );
 
-  static const TextStyle _medium =
-      TextStyle(fontSize: 14, color: AppColors.black);
+  static const TextStyle _medium = TextStyle(
+    fontSize: 14,
+    fontFamily: 'NotoSanJP',
+  );
 
-  static const TextStyle _large =
-      TextStyle(fontSize: 16, color: AppColors.black);
+  static const TextStyle _large = TextStyle(
+    fontSize: 16,
+    fontFamily: 'NotoSanJP',
+  );
 
-  static const TextStyle _extraLarge =
-      TextStyle(fontSize: 18, color: AppColors.black);
+  static const TextStyle _extraLarge = TextStyle(
+    fontSize: 18,
+    fontFamily: 'NotoSanJP',
+  );
 
   //medium size 14
   static TextStyle get mediumRegular =>
