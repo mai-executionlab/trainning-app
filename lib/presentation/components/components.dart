@@ -11,6 +11,7 @@ export './dialog/loading_dialog.dart';
 
 //shape
 export './shape/shape_background.dart';
+export './shape/shape_separator.dart';
 
 //image
 export './image/net_image.dart';
