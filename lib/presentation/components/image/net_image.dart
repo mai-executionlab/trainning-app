@@ -11,6 +11,7 @@ class NetImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.placeHolder,
     this.errorWidget,
+    this.radius,
   }) : super(key: key);
 
   final double width;
@@ -20,10 +21,11 @@ class NetImage extends StatelessWidget {
 
   final Widget? placeHolder;
   final Widget? errorWidget;
+  final double? radius;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(5.0),
+      borderRadius: BorderRadius.circular(radius ?? 5.0),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         width: width,
@@ -43,7 +45,8 @@ class NetImage extends StatelessWidget {
         //   );
         // },
         placeholderFadeInDuration: const Duration(milliseconds: 500),
-        placeholder: (context, url) => SizedBox(
+        placeholder: (context, url) => Container(
+          color: AppColors.greyBackground,
           width: width,
           height: height,
           child: placeHolder,
