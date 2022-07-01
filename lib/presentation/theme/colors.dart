@@ -14,9 +14,10 @@ class AppColors {
   static const Color greyBorder = Color(0xFFC8C8C8);
 
   static const Color red = Color(0xFFEE2737);
+  static const Color yellow = Color(0xFFEAB428);
 
   static const Color lightBlue = Color(0xFFE1ECF2);
 
   static const Color brand2 = Color(0xFF3F4443);
-  static const Color customizeFG= Color(0xFF0D0D0D);
+  static const Color customizeFG = Color(0xFF0D0D0D);
 }
