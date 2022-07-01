@@ -165,10 +165,10 @@
 //   }
 // }
 
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_app/presentation/pages/login/login_page.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
@@ -277,6 +277,14 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _animationController.dispose();
+    _logoController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -362,7 +370,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                   child: Hero(
                     tag: 'logo',
                     child: Image.asset(
-                      AppAssets.logo,
+                      AppAssets.logoColor,
                       height: 50,
                     ),
                   ),

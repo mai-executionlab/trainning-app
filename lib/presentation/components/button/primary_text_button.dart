@@ -25,7 +25,7 @@ class PrimaryTextButton extends StatelessWidget {
       decoration: ShapeDecoration(
         color: buttonStyle?.bgColor,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(theme.AppStyles.borderRadius),
+            borderRadius: BorderRadius.circular(6.0),
             side: const BorderSide(color: theme.AppColors.primaryColor)),
       ),
       child: CupertinoButton(

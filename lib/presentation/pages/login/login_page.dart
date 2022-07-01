@@ -56,7 +56,7 @@ class LoginPage extends StatelessWidget {
                           tag: 'logo',
                           child: Center(
                             child: Image.asset(
-                              AppAssets.logo,
+                              AppAssets.logoColor,
                               height: 50,
                             ),
                           ),

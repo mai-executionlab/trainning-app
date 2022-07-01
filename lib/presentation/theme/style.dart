@@ -12,6 +12,9 @@ class TextStyles {
   static const TextStyle _large =
       TextStyle(fontSize: 16, color: AppColors.black);
 
+  static const TextStyle _extraLarge =
+      TextStyle(fontSize: 18, color: AppColors.black);
+
   //medium size 14
   static TextStyle get mediumRegular =>
       _medium.copyWith(fontWeight: FontWeight.w400);
@@ -23,10 +26,16 @@ class TextStyles {
   static TextStyle get smallRegular =>
       _small.copyWith(fontWeight: FontWeight.w400);
 
+  static TextStyle get smallBold =>
+      _small.copyWith(fontWeight: FontWeight.w700);
+
   //large size 16
   static TextStyle get largeBold =>
       _large.copyWith(fontWeight: FontWeight.w700);
 
+//extra large size 18
+  static TextStyle get extraLargeBold =>
+      _extraLarge.copyWith(fontWeight: FontWeight.w700);
   // static TextStyle get buttonText =>
   // _large.copyWith(fontWeight: FontWeight.w700);
   // static TextStyle get buttonText =>
@@ -35,8 +44,8 @@ class TextStyles {
 
 class AppStyles {
   AppStyles._();
-  static const borderRadius = 3.0;
-  static const horizontalMargin = 25.0;
+  // static const borderRadius = 3.0;
+  static const horizontalMargin = 24.0;
 }
 
 ////////////////////////-BUTTON-///////////////////////
