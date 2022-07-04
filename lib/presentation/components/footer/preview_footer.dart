@@ -57,7 +57,7 @@ class PreviewFooter extends StatelessWidget {
                 children: [
                   CustomButton(
                     height: 48,
-                    icon: SvgPicture.asset(AppAssets.up),
+                    icon: SvgPicture.asset(AppAssets.upDoubleArrow),
                     bgColor: AppColors.white,
                     onPressed: () {},
                   ),

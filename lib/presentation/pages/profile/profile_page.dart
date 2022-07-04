@@ -5,7 +5,6 @@ import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
-import 'package:training_app/presentation/theme/enum.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 class ProfilePage extends ConsumerWidget {
@@ -47,6 +46,7 @@ class ProfilePage extends ConsumerWidget {
         ),
         floatingActionButton: Container(
           margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 13),
+          padding: const EdgeInsets.only(top: 5),
           height: 75,
           width: double.maxFinite,
           decoration: ShapeDecoration(
@@ -59,6 +59,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           child: Center(child: Consumer(builder: (context, ref, _) {
             return TabBar(
+              isScrollable: true,
               indicatorColor: Colors.transparent,
               labelStyle: TextStyles.smallBold,
               labelColor: AppColors.customizeFG,
@@ -66,10 +67,11 @@ class ProfilePage extends ConsumerWidget {
               tabs: tabbar
                   .map((tab) => Tab(
                         text: tab.tabName,
-                        iconMargin: const EdgeInsets.only(bottom: 7),
+                        iconMargin: const EdgeInsets.only(bottom: 5),
                         // icon: Icon(Icons.abc),
                         icon: SvgPicture.asset(
                           tab.tabIcon,
+                          height: 24,
                           color: tabbar[ref.watch(tabController)] == tab
                               ? AppColors.customizeFG
                               : AppColors.customizeFG.withOpacity(0.5),
