@@ -44,7 +44,6 @@ const listActivity = [
     'title': 'マングローブSUP&バラス島上陸ツアーログ',
     'content':
         '西表島の魅力を1日で満喫できる凝縮ツアー！SUP or カヌーとトレッキングで”幸運の滝”と呼ばれるクーラの滝を目指します。滝遊びを楽しんだ後は、“奇跡の島”バラス島へ上陸！',
-   
   }
 ];
 const listImgActivity = [
@@ -60,4 +59,19 @@ const listImgActivity = [
       'https://s3-alpha-sig.figma.com/img/74f5/6da2/8813fd54e04192bbbeeb01445bc38c1d?Expires=1657497600&Signature=EAZWBWaZZAr7kF27zRMV1UANWNlnDRrzcNnwxmQwPWzr7DJuZ-tq0Kn7l7lvOkrH-clX9HKlBsH0sc1kPnWB~V3lq4H-Ui5NtxJ1wVYNY71FDmCCAk1l0zbWmrG7i1oOz-KBtJi-WkSrzSJE~cqDrDUKsbcSIyyUPciYxTqMu8gx5neIizM9BcrnjM2dcMjkH7gW7wUOGMlLQRfJ7Z-DlvCnX~9oP8DeBjwDNrcbq9xzlo3GSh6uKHcU25Z57J0SkBRpoQtC21ISTnJKSlVcEqNr-9YZ96LKsYi0CJbToP-oh-DpRuNCU0e78gPdG5y~2BzVWywzDHCgSZh7Kb8UKg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'
     ],
   }
+];
+
+const listContentPhoto = [
+  '西表・由布・竹富島めぐり日帰りツアー',
+  'マンタとウミガメシュノーケリング',
+  'ウミガメシュノーケリング'
+];
+
+final listImgPhoto = [
+  List.filled(3,
+      'https://s3-alpha-sig.figma.com/img/45e7/408f/78ba027f586dcdc8121635083fb20d80?Expires=1657497600&Signature=E2Rq1ILS-CEoW9OcPUTDy7CYEGM6R7Kplyt4yOvA0~r1nTAw82HMj8rLx5i9bO4RoTUanDNb1o4PX~a7xjpUU8iPp~PF2dWXENgX-uCQ2JLxlOevTZTwlLGjAd3byqHrfrrQkc5uSyCuOfhj0RE5jvybFwHQXyVSO~uB-x6WwkXBgDSwvrdYH~twPx5yjcYhMQ~howA93v9UPoeoEbCNzGGubVMr4VibAyxGzY5wR28OfoDRLmpLwemL8uQ6ENKFo3f-nD1pIO4VuXHvH736CNKxCrbD5VPOCRZHe7GKO3671Y77GkjcXA2Dpvt2WBiDpeVoypT1l3vIbAbf7D1Ggg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'),
+  List.filled(7,
+      'https://s3-alpha-sig.figma.com/img/26c7/cd80/6a6795f889ab388e6af13b0b7d0e7188?Expires=1657497600&Signature=Xv85-0tjZfkC92mbbhU62h5aO4Ke6aepLljOEIipbRDf6QumcZ2ayLeP9Hplt54eKPk~ezELh62pI7oniYkXBJAWwUgWbgVd5uwArcBSc6P4oWvkPJiWojdIjv6bNLOrQ3HC8PX5EPVQFtj8gaQt5ihBZsW3T8wKS4gqVK0MD9q~qKKhJgChwZgxVUh9bs34-EngkOBND4n54UV2x7V~yuQvybHCqf~I9A~8PP~XHhoXUn~iLYUeFBJUZC1D-wIspRPFCmDJhAPoSC8PDFCgnt~BexcB6cLKtsO0RFOGTciePcFCsmucLjsvxF9QpFgrrDA1SW0GC0j-bZcsV5uF2g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'),
+  List.filled(9,
+      'https://s3-alpha-sig.figma.com/img/74f5/6da2/8813fd54e04192bbbeeb01445bc38c1d?Expires=1657497600&Signature=EAZWBWaZZAr7kF27zRMV1UANWNlnDRrzcNnwxmQwPWzr7DJuZ-tq0Kn7l7lvOkrH-clX9HKlBsH0sc1kPnWB~V3lq4H-Ui5NtxJ1wVYNY71FDmCCAk1l0zbWmrG7i1oOz-KBtJi-WkSrzSJE~cqDrDUKsbcSIyyUPciYxTqMu8gx5neIizM9BcrnjM2dcMjkH7gW7wUOGMlLQRfJ7Z-DlvCnX~9oP8DeBjwDNrcbq9xzlo3GSh6uKHcU25Z57J0SkBRpoQtC21ISTnJKSlVcEqNr-9YZ96LKsYi0CJbToP-oh-DpRuNCU0e78gPdG5y~2BzVWywzDHCgSZh7Kb8UKg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')
 ];

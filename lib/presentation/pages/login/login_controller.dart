@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 
 import 'package:training_app/data/data_source/remote/base/dio_client.dart';
