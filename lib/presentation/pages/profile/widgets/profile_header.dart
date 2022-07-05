@@ -7,7 +7,12 @@ import 'package:training_app/presentation/pages/profile/profile_controller.dart'
 import 'package:training_app/presentation/theme/theme.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({Key? key}) : super(key: key);
+  const ProfileHeader({
+    Key? key,
+    this.onTapSetting,
+  }) : super(key: key);
+
+  final VoidCallback? onTapSetting;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,8 @@ class ProfileHeader extends StatelessWidget {
     const String avt =
         'https://s3-alpha-sig.figma.com/img/9991/cef5/aaed996b4b1aeec0bd3f612bc276f858?Expires=1657497600&Signature=D~I9pookPfjgdM4xt5PDfVUwTz~EToXUyB-Zk1QyRNUaxd9trxyygaJyu-luBGIeE6IIzp53hP5rh0jNdN5ClXTMlo6dqHguBKo~L7CJwA9mPQFUCsL0M~c-uS4F0ESrQJFpMGKAuWkLcAPk8fzJiGdWo4OPYbbpni73I~zkKc5sY~pplU8m6GHjwo5MuqQkOkDn4W3lwuszf9hkiLoplwBIKkYJ9380W6gPULztecfVKeJ4IJroKVLcvNjMgg0vCIZFtzuZocqO7~p3o1moVtORq2eUT~Ef4lx7oR-HC0R8LCD1JuVCJcJoXSKty~TBbEpW0Igk-tl6DEEFWHuxkw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
 
-    const String cover =
+    final String? cover;
+    cover =
         'https://s3-alpha-sig.figma.com/img/089f/a4c7/8b3c7a6da07b05c7c3020cc539ff0037?Expires=1657497600&Signature=g-Tz9EV~lncFq9QKg9prRMNSItxS1IAJ9M2DUpdJFPLrcpRtX831VuUCXSxEYCQmQhcqzFOcgZ11G5-mTzbKldUTol5WQV7GtOU988I4-lgXXYVPdbLW3yqdWMgZKcN24l2FbEZ8vOOgs7n67wc-0aiSbZRPoKeQVasRK~IsTw3UFXzB2Acy14RC~4fdCnz3kE48Ie5W3nww5ioE8vnvE8QllTBIehLhOfJPTJ~QOlbW1djDlUYN0FtG8vJCxogF8ETu9nYznpPHc3aJcGdk3zuxGNP2OPyra74ivmfhWDA6uIDeuyaKTkIMvnlFtsuBiMjM4VKpyIWzTfk2zwAhtg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
 
     return Stack(children: [
@@ -52,8 +58,8 @@ class ProfileHeader extends StatelessWidget {
             ),
           ),
           const Divider(
-            indent: 24,
-            endIndent: 24,
+            indent: AppStyles.horizontalMargin,
+            endIndent: AppStyles.horizontalMargin,
             height: 1,
             thickness: 1,
           ),
@@ -76,8 +82,9 @@ class ProfileHeader extends StatelessWidget {
                     onPressed: (index) {
                       final current = ref.watch(toggleLanguageController);
                       if (!current[index]) {
-                        ref.read(toggleLanguageController.state).state =
-                            current.reversed.toList();
+                        ref
+                            .read(toggleLanguageController.notifier)
+                            .onToggle(index: index);
                       }
                     },
                     isSelected: ref.watch(toggleLanguageController),
@@ -112,7 +119,6 @@ class ProfileHeader extends StatelessWidget {
           ),
           ///////////////end language toggle button
           Stack(
-            fit: StackFit.loose,
             children: [
               Container(
                 margin: const EdgeInsets.only(
@@ -120,23 +126,8 @@ class ProfileHeader extends StatelessWidget {
                   left: AppStyles.horizontalMargin,
                   right: AppStyles.horizontalMargin,
                 ),
-                child: NetImage(
-                  width: double.maxFinite,
-                  height: 154,
-                  imageUrl: cover,
-                  placeHolder: Container(
-                    decoration: const BoxDecoration(
-                        color: AppColors.greyBackground,
-                        boxShadow: [
-                          BoxShadow(blurRadius: 3, color: AppColors.greyBorder)
-                        ]),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        AppAssets.image,
-                        height: 24,
-                      ),
-                    ),
-                  ),
+                child: CoverImage(
+                  img: cover,
                 ),
               ),
               const Positioned(
@@ -153,12 +144,13 @@ class ProfileHeader extends StatelessWidget {
                     height: 20,
                     child: CupertinoButton(
                         padding: const EdgeInsets.all(0),
+                        onPressed: onTapSetting,
                         // color: AppColors.white,
                         child: Row(children: [
                           const Icon(
                             Icons.settings,
                             size: 16,
-                            color: AppColors.black1,
+                            color: AppColors.black33,
                           ),
                           const SizedBox(
                             width: 6,
@@ -166,10 +158,9 @@ class ProfileHeader extends StatelessWidget {
                           Text(
                             'プロフィール編集',
                             style: TextStyles.smallRegular
-                                .copyWith(color: AppColors.black1, height: 1),
+                                .copyWith(color: AppColors.black33, height: 1),
                           )
-                        ]),
-                        onPressed: () {}),
+                        ])),
                   ))
             ],
           ),
@@ -180,6 +171,7 @@ class ProfileHeader extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
+                  ///user infor
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -201,6 +193,10 @@ class ProfileHeader extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                /// end user infor
+                ///
+
                 CustomButton(
                   icon: SvgPicture.asset(AppAssets.phoneOutlined),
                 ),

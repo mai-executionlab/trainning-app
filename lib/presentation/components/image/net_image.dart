@@ -11,7 +11,7 @@ class NetImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.placeHolder,
     this.errorWidget,
-    this.radius,
+    this.radius = 5.0,
   }) : super(key: key);
 
   final double width;
@@ -21,11 +21,11 @@ class NetImage extends StatelessWidget {
 
   final Widget? placeHolder;
   final Widget? errorWidget;
-  final double? radius;
+  final double radius;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(radius ?? 5.0),
+      borderRadius: BorderRadius.circular(radius),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         width: width,

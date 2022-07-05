@@ -1,14 +1,13 @@
 import 'package:riverpod/riverpod.dart';
+import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 final tabController = StateProvider<int>((ref) => 0);
 
-final toggleLanguageController = StateProvider((ref) => [false, true]);
-
-
-
-
-
+final toggleLanguageController =
+    StateNotifierProvider<ToggleButtonNotifier, List<bool>>(
+  (ref) => ToggleButtonNotifier([true, false]),
+);
 
 enum ProfileTab {
   home,

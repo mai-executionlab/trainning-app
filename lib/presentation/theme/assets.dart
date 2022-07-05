@@ -26,6 +26,11 @@ class AppAssets {
 
   static const String upDoubleArrow = '${_iconPath}up-double-arrow.svg';
   static const String downArrow = '${_iconPath}down-arrow.svg';
+
+  static const String leftArrow = '${_iconPath}left-arrow.svg';
+  static const String close = '${_iconPath}close.svg';
+  static const String addOutlined = '${_iconPath}add-outlined.svg';
+
   static const String folder = '${_iconPath}folder.svg';
 
   static const String footerText = '© GuideNavi. All Rights Reserved.';
