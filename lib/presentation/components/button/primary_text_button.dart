@@ -4,15 +4,15 @@ import 'package:training_app/presentation/theme/theme.dart' as theme;
 class PrimaryTextButton extends StatelessWidget {
   const PrimaryTextButton({
     Key? key,
-    required this.height,
-    required this.width,
+    this.height = 48,
+    // required this.width,
     required this.text,
     this.buttonStyle,
     this.onPressed,
   }) : super(key: key);
 
   final double height;
-  final double width;
+  // final double width;
   final String text;
   final theme.ButtonStyle? buttonStyle;
   final VoidCallback? onPressed;
@@ -20,7 +20,7 @@ class PrimaryTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
+      width: double.maxFinite,
       height: height,
       decoration: ShapeDecoration(
         color: buttonStyle?.bgColor,

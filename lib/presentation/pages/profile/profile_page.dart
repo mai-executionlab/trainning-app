@@ -5,6 +5,7 @@ import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
+import 'package:training_app/presentation/pages/profile_edit/views/profile_setting/profile_setting.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 class ProfilePage extends ConsumerWidget {
@@ -13,7 +14,12 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const tabbar = ProfileTab.values;
-    const header = ProfileHeader();
+    final header = ProfileHeader(
+      onTapSetting: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => const ProfileSetting()));
+      },
+    );
     const footer = PreviewFooter();
     return DefaultTabController(
       length: tabbar.length,

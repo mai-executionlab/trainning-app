@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
-class ToggleButton extends StatelessWidget {
-  const ToggleButton(
+class ToggleButton2 extends StatelessWidget {
+  const ToggleButton2(
       {Key? key,
       required this.left,
       required this.right,
-      required this.width,
+      this.width = 120,
       this.onPressed,
       required this.isSelected})
       : super(key: key);
@@ -18,46 +18,39 @@ class ToggleButton extends StatelessWidget {
   final List<bool> isSelected;
   @override
   Widget build(BuildContext context) {
-    final style = TextStyles.mediumRegular;
+    final style = TextStyles.smallBold;
     return Container(
       // padding: const EdgeInsets.symmetric(vertical: 20),
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      height: 40,
+      // margin: const EdgeInsets.symmetric(vertical: 20),
+      height: 36,
       width: width,
       decoration: ShapeDecoration(
           color: AppColors.white,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
       child: ToggleButtons(
+        borderWidth: 1,
         borderColor: AppColors.greyBorder,
         selectedBorderColor: AppColors.primaryColor,
         onPressed: onPressed,
         isSelected: isSelected,
         renderBorder: true,
-        selectedColor: AppColors.primaryColor,
-        fillColor: AppColors.primaryColor.withOpacity(0.1),
-        color: AppColors.black,
+        selectedColor: AppColors.white,
+        fillColor: AppColors.primaryColor,
+        color: AppColors.grey88,
         borderRadius: BorderRadius.circular(4),
         textStyle: style,
         children: [
           SizedBox(
             width: (width - 4) / 2,
             child: Center(
-              child: Text(
-                left,
-                style: style.copyWith(
-                    fontWeight:
-                        isSelected[0] ? FontWeight.w700 : FontWeight.w400),
-              ),
+              child: Text(left),
             ),
           ),
           SizedBox(
             width: (width - 4) / 2,
             child: Center(
-              child: Text(right,
-                  style: style.copyWith(
-                      fontWeight:
-                          isSelected[1] ? FontWeight.w700 : FontWeight.w400)),
+              child: Text(right),
             ),
           )
         ],

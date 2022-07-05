@@ -71,13 +71,13 @@ class ButtonStyle {
 class ButtonStyles {
   ButtonStyles._();
   static ButtonStyle get elevated => ButtonStyle(
-        textStyle: TextStyles.mediumBold.copyWith(color: AppColors.white),
+        textStyle: TextStyles.largeBold.copyWith(color: AppColors.white),
         bgColor: AppColors.primaryColor,
       );
 
   static ButtonStyle get outlined => ButtonStyle(
         textStyle:
-            TextStyles.mediumBold.copyWith(color: AppColors.primaryColor),
+            TextStyles.largeBold.copyWith(color: AppColors.primaryColor),
         bgColor: AppColors.white,
       );
 }

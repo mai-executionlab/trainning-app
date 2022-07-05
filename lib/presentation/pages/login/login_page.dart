@@ -87,7 +87,7 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(height: 40),
                         PrimaryTextButton(
                           height: 48,
-                          width: double.maxFinite,
+                          // width: double.maxFinite,
                           text: 'ログアウト',
                           buttonStyle: ButtonStyles.elevated,
                           onPressed: () {
@@ -113,7 +113,7 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(height: 40),
                         PrimaryTextButton(
                           height: 48,
-                          width: double.maxFinite,
+                          // width: double.maxFinite,
                           text: 'ガイドナビとは',
                           buttonStyle: ButtonStyles.outlined,
                           onPressed: () {},

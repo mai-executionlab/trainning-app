@@ -75,3 +75,5 @@ final listImgPhoto = [
   List.filled(9,
       'https://s3-alpha-sig.figma.com/img/74f5/6da2/8813fd54e04192bbbeeb01445bc38c1d?Expires=1657497600&Signature=EAZWBWaZZAr7kF27zRMV1UANWNlnDRrzcNnwxmQwPWzr7DJuZ-tq0Kn7l7lvOkrH-clX9HKlBsH0sc1kPnWB~V3lq4H-Ui5NtxJ1wVYNY71FDmCCAk1l0zbWmrG7i1oOz-KBtJi-WkSrzSJE~cqDrDUKsbcSIyyUPciYxTqMu8gx5neIizM9BcrnjM2dcMjkH7gW7wUOGMlLQRfJ7Z-DlvCnX~9oP8DeBjwDNrcbq9xzlo3GSh6uKHcU25Z57J0SkBRpoQtC21ISTnJKSlVcEqNr-9YZ96LKsYi0CJbToP-oh-DpRuNCU0e78gPdG5y~2BzVWywzDHCgSZh7Kb8UKg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')
 ];
+
+final languages = ['English', 'Vietnamese', '日本語'];
