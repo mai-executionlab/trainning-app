@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ToggleButtonNotifier extends StateNotifier<List<bool>> {
@@ -16,3 +17,13 @@ class ToggleButtonNotifier extends StateNotifier<List<bool>> {
     }
   }
 }
+
+final textFieldController = Provider.autoDispose<TextEditingController>((ref) {
+  final controller = TextEditingController();
+
+  ref.onDispose(() {
+    controller.dispose();
+  });
+
+  return controller;
+});

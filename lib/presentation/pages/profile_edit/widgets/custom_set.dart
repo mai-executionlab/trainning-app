@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:training_app/presentation/components/components.dart';
+import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/pages/profile_edit/profile_edit_controller.dart';
 import 'package:training_app/presentation/pages/profile_edit/widgets/label.dart';
 
@@ -53,6 +54,7 @@ class CustomSet extends StatelessWidget {
                     right: '〇〇語',
                     isSelected: currentLanguage,
                     onPressed: (index) {
+                      ref.read(textFieldController).text ='abc';
                       if (!currentLanguage[index]) {
                         ref
                             .read(toggleLanguageEditController.notifier)
