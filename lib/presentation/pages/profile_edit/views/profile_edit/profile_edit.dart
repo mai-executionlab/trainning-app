@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:training_app/data/data_source/mock.dart';
 import 'package:training_app/presentation/components/components.dart';
-import 'package:training_app/presentation/pages/profile_edit/views/profile_setting/profile_setting_controller.dart';
+import 'package:training_app/presentation/pages/controller.dart';
+import 'package:training_app/presentation/pages/profile_edit/views/profile_edit/profile_edit_controller.dart';
+
 import 'package:training_app/presentation/pages/profile_edit/widgets/common_layout.dart';
 import 'package:training_app/presentation/pages/profile_edit/widgets/custom_set.dart';
 import 'package:training_app/presentation/pages/profile_edit/widgets/drop_down_selection.dart';
@@ -125,11 +127,14 @@ class ProfileSetting extends StatelessWidget {
               const SizedBox(height: 50),
 
               /// username
-              CustomSet(
-                label: 'プロフィール名',
-                isRequired: true,
-                controller: TextEditingController(text: '旅行花子'),
-              ),
+              Consumer(builder: (context, ref, child) {
+                return CustomSet(
+                  label: 'プロフィール名',
+                  isRequired: true,
+                  // controller: TextEditingController(text: '旅行花子'),
+                  controller: ref.watch(textFieldController),
+                );
+              }),
 
               ///end username
               const SizedBox(height: 50),

@@ -1,1 +1,1 @@
-export './profile_setting/profile_setting.dart';
+export './profile_edit/profile_edit.dart';
