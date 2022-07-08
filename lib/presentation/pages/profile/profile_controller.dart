@@ -1,12 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:training_app/data/repository_impl/repository_provider.dart';
 import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 final tabController = StateProvider<int>((ref) => 0);
 
+final languageController = Provider<String>((ref) {
+  final account = ref.watch(accountController).value?.object;
+  final currentLanguage = ref.watch(toggleLanguageController);
+  if (currentLanguage[0] == false) {
+    return account?.secondaryLanguage!.code??'en';
+  }
+  return account?.primaryLanguage!.code??'ja';
+});
 final toggleLanguageController =
     StateNotifierProvider<ToggleButtonNotifier, List<bool>>(
-  (ref) => ToggleButtonNotifier([true, false]),
+  (ref) {
+    return ToggleButtonNotifier([true, false]);
+  },
 );
 
 enum ProfileTab {
@@ -48,3 +60,8 @@ extension ProfileTabExtension on ProfileTab {
     }
   }
 }
+
+final accountController = FutureProvider((ref) {
+  debugPrint('call');
+  return ref.watch(guideRepoProvider).getUserDetailInfor();
+});

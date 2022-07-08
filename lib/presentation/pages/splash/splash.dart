@@ -250,7 +250,6 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
       ..addListener(() {
         setState(() {});
       });
-    ;
     _curve = CurvedAnimation(
         parent: _animationController, curve: Curves.easeInOutCubic);
 

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:training_app/injection.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/login/login_controller.dart';
 import 'package:training_app/presentation/pages/pages.dart';
 import 'package:training_app/presentation/theme/theme.dart';
+import 'package:training_app/shared_pref.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class LoginPage extends StatelessWidget {
     //         .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
     //   } else if (state.status == AuthStatus.processing) {}
     // });
+    
     return Consumer(
       builder: (context, ref, child) {
         ref.listen<AuthState>(
@@ -32,7 +35,10 @@ class LoginPage extends StatelessWidget {
               showDialog(
                   barrierDismissible: false,
                   context: context,
-                  builder: (context) => LoadingDialog());
+                  builder: (context) => const LoadingDialog());
+            } else if (preState?.status == AuthStatus.processing &&
+                state.status == AuthStatus.fail) {
+              Navigator.of(context).pop();
             }
           },
         );
@@ -116,7 +122,9 @@ class LoginPage extends StatelessWidget {
                           // width: double.maxFinite,
                           text: 'ガイドナビとは',
                           buttonStyle: ButtonStyles.outlined,
-                          onPressed: () {},
+                          onPressed: () async {
+                            await getIt<SharedPref>().clear();
+                          },
                         ),
 
                         // const Spacer(flex: 6),

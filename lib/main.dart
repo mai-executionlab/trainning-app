@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:training_app/shared_pref.dart';
 
+import 'injection.dart';
 import 'presentation/pages/pages.dart';
 
-void main() {
+void main() async {
   // ProviderContainer()
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
+  await getIt<SharedPref>().init();
   runApp(const ProviderScope(
     child: MyApp(),
   ));

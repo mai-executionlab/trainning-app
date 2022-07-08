@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:training_app/data/data_source/remote/index.dart';
 
 class DioClient {
   final Dio _dio;
+  final DioIntercepter intercepter;
 
-  DioClient({BaseURL baseURL = BaseURLs.demo})
-      : _dio = Dio(BaseOptions(baseUrl: baseURL.url));
+  DioClient({
+    BaseURL baseURL = BaseURLs.demo,
+    required this.intercepter,
+  }) : _dio = Dio(BaseOptions(baseUrl: baseURL.url))
+          ..interceptors.add(intercepter);
   Future<DioResponse> execute({
     required DioRequest request,
   }) async {
@@ -14,6 +17,7 @@ class DioClient {
       contentType: Headers.jsonContentType,
       method: request.method,
     );
+
     try {
       Response response = await _dio.request(
         request.path,

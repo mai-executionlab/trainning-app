@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:training_app/domain/entities/account.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
@@ -14,13 +15,19 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentLanguageCode = ref.watch(languageController);
     const tabbar = ProfileTab.values;
     final header = ProfileHeader(
+      account: ref.watch(accountController).value?.object ?? Account(),
+      currentLanguage: currentLanguageCode,
       onTapSetting: () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (_) => const ProfileSetting()));
       },
     );
+
+    
+    // ref.listen(accountController, (previous, next) {});
     const footer = PreviewFooter();
     return DefaultTabController(
       length: tabbar.length,
@@ -32,21 +39,23 @@ class ProfilePage extends ConsumerWidget {
             return IndexedStack(
               index: ref.watch(tabController),
               children: tabbar
-                  .map((tab) => ListView(
-                        children: [
-                          /////////// header
-                          header,
-                          //////////// end header
-                          const SizedBox(height: 30),
-                          //main section
-                          mapTabView(tab),
-                          //end main
-                          const SizedBox(height: 90),
-                          ////////////////// footer
-                          footer
-                          ////////////////// end footer
-                        ],
-                      ))
+                  .map(
+                    (tab) => ListView(
+                      children: [
+                        /////////// header
+                        header,
+                        //////////// end header
+                        const SizedBox(height: 30),
+                        //main section
+                        mapTabView(tab),
+                        //end main
+                        const SizedBox(height: 90),
+                        ////////////////// footer
+                        footer
+                        ////////////////// end footer
+                      ],
+                    ),
+                  )
                   .toList(),
             );
           }),
