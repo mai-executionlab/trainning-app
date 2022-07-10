@@ -26,14 +26,20 @@ class GuideService {
     return ObjectResponse(object: object);
   }
 
-  Future<ObjectResponse<Account>> getUserGeneralInfor({
+  Future<ObjectResponse<GeneralInformation>> getUserGeneralInfor({
     required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
   }) async {
-    final DioRequest request =
-        GuideRequest.getUserGeneralInfor(username: username);
+    final DioRequest request = GuideRequest.getUserGeneralInfor(
+      username: username,
+      primaryLanguage: primaryLanguage,
+      secondLanguage: secondLanguage,
+    );
 
     final DioResponse response = await dioClient.execute(request: request);
-    final Account object = Account.fromJson(response.data);
+    final GeneralInformation object =
+        GeneralInformation.fromJson(response.data);
 
     return ObjectResponse(object: object);
   }

@@ -1,19 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
+
+import 'package:training_app/data/repository_impl/guide_repository_impl.dart';
 import 'package:training_app/data/repository_impl/repository_provider.dart';
+import 'package:training_app/domain/entities/entity.dart';
 import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 final tabController = StateProvider<int>((ref) => 0);
 
-final languageController = Provider<String>((ref) {
-  final account = ref.watch(accountController).value?.object;
+final languageController = Provider.family<List<String>, Account?>((ref, args) {
+  // final account = ref.watch(profileHeaderController);
   final currentLanguage = ref.watch(toggleLanguageController);
+  List<String> languages = [
+    args?.primaryLanguage?.code ?? 'ja',
+    args?.secondaryLanguage?.code ?? 'en'
+  ];
   if (currentLanguage[0] == false) {
-    return account?.secondaryLanguage!.code??'en';
+    return languages.reversed.toList();
+  } else {
+    return languages;
   }
-  return account?.primaryLanguage!.code??'ja';
 });
+
 final toggleLanguageController =
     StateNotifierProvider<ToggleButtonNotifier, List<bool>>(
   (ref) {
@@ -61,7 +69,42 @@ extension ProfileTabExtension on ProfileTab {
   }
 }
 
-final accountController = FutureProvider((ref) {
-  debugPrint('call');
-  return ref.watch(guideRepoProvider).getUserDetailInfor();
-});
+// final accountController = FutureProvider((ref) async {
+//   print('future account');
+//   return await ref.watch(guideRepoProvider).getUserDetailInfor();
+// });
+
+final tabHomeController =
+    FutureProvider.family<ObjectResponse<GeneralInformation>, List<String?>>(
+  (ref, args) async {
+    return await ref.watch(guideRepoProvider).getUserGeneralInfor(
+          username: args[0] ?? '',
+          primaryLanguage: args[1] ?? 'ja',
+          secondLanguage: args[2] ?? 'en',
+        );
+  },
+);
+
+enum PageState {
+  init,
+  loading,
+  loaded,
+  error,
+}
+
+class ProfileHeaderNotifier extends StateNotifier<Account?> {
+  final GuideRepositoryImpl repositoryImpl;
+  ProfileHeaderNotifier({
+    required this.repositoryImpl,
+  }) : super(null);
+
+  init() async {
+    var result = await repositoryImpl.getUserDetailInfor();
+
+    state = result.object;
+  }
+}
+
+final profileHeaderController =
+    StateNotifierProvider<ProfileHeaderNotifier, Account?>((ref) =>
+        ProfileHeaderNotifier(repositoryImpl: ref.watch(guideRepoProvider)));

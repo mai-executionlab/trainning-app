@@ -10,4 +10,22 @@ class GuideRepositoryImpl extends GuideRepository {
   @override
   Future<ObjectResponse<Account>> getUserDetailInfor() =>
       _guideService.getUserDetailInfor();
+
+  @override
+  Future<ObjectResponse<GeneralInformation>> getUserGeneralInfor({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+  }) =>
+      _guideService.getUserGeneralInfor(
+        username: username,
+        primaryLanguage: primaryLanguage,
+        secondLanguage: secondLanguage,
+      );
+
+  @override
+  Future<ObjectResponse<Account>> getUserShortInfor({
+    required String username,
+  }) =>
+      _guideService.getUserShortInfor(username: username);
 }

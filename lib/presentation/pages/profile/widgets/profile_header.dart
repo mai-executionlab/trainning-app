@@ -7,7 +7,7 @@ import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
-class ProfileHeader extends ConsumerWidget {
+class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
     Key? key,
     this.onTapSetting,
@@ -17,9 +17,9 @@ class ProfileHeader extends ConsumerWidget {
 
   final VoidCallback? onTapSetting;
   final Account account;
-  final String currentLanguage;
+  final List<String> currentLanguage;
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> globalKey = GlobalKey();
     Size size = MediaQuery.of(context).size;
 
@@ -180,18 +180,18 @@ class ProfileHeader extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          account.nickname?[currentLanguage] ?? '',
+                          account.nickname?[currentLanguage[0]] ?? '',
                           style: TextStyles.extraLargeBold,
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          account.nickname?['en'] ?? '',
+                          account.nickname?[currentLanguage[1]] ?? '',
                           style: TextStyles.smallRegular.copyWith(
                               color: AppColors.black.withOpacity(0.8)),
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          account.title?[currentLanguage] ?? '',
+                          account.title?[currentLanguage[0]] ?? '',
                           style: TextStyles.mediumBold,
                         )
                       ],

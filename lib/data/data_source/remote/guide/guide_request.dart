@@ -12,9 +12,16 @@ class GuideRequest {
         path: '/guides/$username/info',
       );
 
-  static DioRequest getUserGeneralInfor({required String username}) =>
+  static DioRequest getUserGeneralInfor({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+  }) =>
       DioRequest(
-        httpMethod: HttpMethod.get,
-        path: '/guides/$username/general_info',
-      );
+          httpMethod: HttpMethod.get,
+          path: '/guides/$username/general_info',
+          parameters: {
+            'primary_language_code': primaryLanguage,
+            'secondary_language_code': secondLanguage,
+          });
 }
