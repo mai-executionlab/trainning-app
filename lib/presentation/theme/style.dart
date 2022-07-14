@@ -75,9 +75,13 @@ class ButtonStyles {
         bgColor: AppColors.primaryColor,
       );
 
+  static ButtonStyle get disabled => ButtonStyle(
+        textStyle: TextStyles.largeBold.copyWith(color: AppColors.white),
+        bgColor: AppColors.primaryColor.withOpacity(0.5),
+      );
+
   static ButtonStyle get outlined => ButtonStyle(
-        textStyle:
-            TextStyles.largeBold.copyWith(color: AppColors.primaryColor),
+        textStyle: TextStyles.largeBold.copyWith(color: AppColors.primaryColor),
         bgColor: AppColors.white,
       );
 }

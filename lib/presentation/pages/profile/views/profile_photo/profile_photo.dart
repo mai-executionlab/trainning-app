@@ -57,8 +57,8 @@ class ProfilePhoto extends StatelessWidget {
           const SizedBox(height: 25),
           Consumer(
             builder: (context, ref, child) {
-              debugPrint(
-                  photoType.indexOf(ref.watch(photoTypeController)).toString());
+              // debugPrint(
+              //     photoType.indexOf(ref.watch(photoTypeController)).toString());
               return IndexedStack(
                 index: photoType.indexOf(ref.watch(photoTypeController)),
                 children: photoType
@@ -109,9 +109,9 @@ class ProfilePhoto extends StatelessWidget {
                     ? null
                     : () {
                         ref.read(photoTypeController.state).state = type;
-                        debugPrint(photoType
-                            .indexOf(ref.read(photoTypeController))
-                            .toString());
+                        // debugPrint(photoType
+                        //     .indexOf(ref.read(photoTypeController))
+                        //     .toString());
                       },
                 child: Row(
                   children: [

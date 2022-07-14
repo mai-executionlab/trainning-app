@@ -8,11 +8,14 @@ class InputText extends StatelessWidget {
     required this.controller,
     this.length,
     this.hint,
+    this.onTap,
   }) : super(key: key);
 
   final TextEditingController controller;
   final int? length;
   final String? hint;
+
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -22,6 +25,7 @@ class InputText extends StatelessWidget {
         ));
     return Center(
       child: TextField(
+        readOnly: onTap != null,
         controller: controller,
         // initialValue: controller.text,
         style: TextStyles.largRegular.copyWith(
@@ -29,6 +33,7 @@ class InputText extends StatelessWidget {
           color: AppColors.black,
           // backgroundColor: AppColors.primaryColor,
         ),
+        onTap: onTap,
         maxLength: length,
         decoration: InputDecoration(
           hintText: hint,

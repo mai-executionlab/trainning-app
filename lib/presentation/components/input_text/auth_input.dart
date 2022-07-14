@@ -19,9 +19,9 @@ class AuthInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      Color? color = ref.watch(loginProvider).status == AuthStatus.fail ||
+      Color? color = ref.watch(loginController).status == AuthStatus.fail ||
               (controller!.text.isEmpty &&
-                  ref.watch(loginProvider).status == AuthStatus.empty)
+                  ref.watch(loginController).status == AuthStatus.empty)
           ? AppColors.red
           : null;
       final borderStyle = OutlineInputBorder(

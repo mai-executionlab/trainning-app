@@ -19,19 +19,19 @@ class CoverImage extends StatelessWidget {
     return img == null || img!.isEmpty
         ? Container(
             height: height,
-            decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(radius)),
-                color: AppColors.greyBackground,
-                shadows: const [
-                  BoxShadow(blurRadius: 3, color: AppColors.greyBorder)
-                ]),
-            child: Center(
-              child: SvgPicture.asset(
-                AppAssets.image,
-                height: 24,
-              ),
-            ),
+            // // decoration: ShapeDecoration(
+            // //     shape: RoundedRectangleBorder(
+            // //         borderRadius: BorderRadius.circular(radius)),
+            // //     color: AppColors.greyBackground,
+            // //     shadows: const [
+            // //       BoxShadow(blurRadius: 3, color: AppColors.greyBorder)
+            // //     ]),
+            // child: Center(
+            //   child: SvgPicture.asset(
+            //     AppAssets.image,
+            //     height: 24,
+            //   ),
+            // ),
           )
         : NetImage(
             width: double.maxFinite,
