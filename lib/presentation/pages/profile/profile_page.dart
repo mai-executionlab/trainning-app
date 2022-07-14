@@ -6,9 +6,8 @@ import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
+import 'package:training_app/presentation/pages/profile/views/profile_spot/profile_spot_controller.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
-import 'package:training_app/presentation/pages/profile_edit/views/index.dart';
-import 'package:training_app/presentation/pages/profile_edit/views/profile_edit/profile_edit_controller.dart';
 
 import 'package:training_app/presentation/theme/theme.dart';
 
@@ -25,13 +24,38 @@ class ProfilePage extends ConsumerWidget {
       (previous, next) {
         if (next.state == PageState.loaded) {
           // print('listen header');
+          var username = next.data.username ?? '';
+          var language1 = next.data.primaryLanguage?.code ?? 'ja';
+          var language2 = next.data.secondaryLanguage?.code ?? 'en';
           ref.watch(profileHomeController.notifier).init(
-              username: next.data.username ?? '',
-              primaryLanguage: next.data.primaryLanguage?.code ?? 'ja',
-              secondLanguage: next.data.secondaryLanguage?.code ?? 'en');
-        }
-        if (next.state == PageState.loading) {
-          print('check $previous');
+              username: username,
+              primaryLanguage: language1,
+              secondLanguage: language2);
+
+          Future.wait([
+            ref.watch(profileDestinationController.notifier).init(
+                username: username,
+                primaryLanguage: language1,
+                secondLanguage: language2),
+          ]);
+          // GuideService guideService =
+          //     GuideService(dioClient: ref.watch(dioProvider));
+          // guideService.getUserSkills(
+          //     username: 'hang', primaryLanguage: 'ja', secondLanguage: 'en');
+          // guideService.getUserAlbums(username: 'hang', page: 1);
+          // guideService.getUserDestinations(
+          //     username: 'hang',
+          //     primaryLanguage: 'ja',
+          //     secondLanguage: 'en',
+          //     page: 1);
+          // guideService.getUserActivities(
+          //     username: 'hang',
+          //     primaryLanguage: 'ja',
+          //     secondLanguage: 'en',
+          //     page: 1);
+          if (next.state == PageState.loading) {
+            print('check $previous');
+          }
         }
       },
     );
@@ -43,20 +67,10 @@ class ProfilePage extends ConsumerWidget {
 
     // print(account?.nickname);
 
-    final header = ProfileHeader(
-      account: account ?? Account(),
-      currentLanguage: currentLanguageCode,
-      onTapSetting: () async {
-        ref.read(profileEditController.notifier).fetchData();
-        var result = await Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const ProfileEdit()));
-
-        if (result == true) {
-          print('reload');
-          ref.read(profileHeaderController.notifier).init();
-        }
-      },
-    );
+    const header = ProfileHeader(
+        // account: account ?? Account(),
+        // currentLanguage: currentLanguageCode,
+        );
 
     Widget mapTabView(ProfileTab tab) {
       switch (tab) {
@@ -85,25 +99,7 @@ class ProfilePage extends ConsumerWidget {
             // can be switch only main section but not save offset of list
             return IndexedStack(
               index: ref.watch(tabController),
-              children: tabbar
-                  .map(
-                    (tab) => ListView(
-                      children: [
-                        /////////// header
-                        header,
-                        //////////// end header
-                        const SizedBox(height: 30),
-                        //main section
-                        mapTabView(tab),
-                        //end main
-                        const SizedBox(height: 90),
-                        ////////////////// footer
-                        footer
-                        ////////////////// end footer
-                      ],
-                    ),
-                  )
-                  .toList(),
+              children: tabbar.map((tab) => mapTabView(tab)).toList(),
             );
           }),
         ),

@@ -17,8 +17,8 @@ class ProfilePhoto extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: AppStyles.horizontalMargin),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child:ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,

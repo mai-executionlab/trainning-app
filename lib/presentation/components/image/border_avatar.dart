@@ -27,7 +27,7 @@ class BorderAvatar extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(size / 2),
         child: imageUrl == null || imageUrl!.isEmpty
-            ? Container(
+            ? SizedBox(
                 height: size,
                 width: size,
                 // color: AppColors.greyBackground,

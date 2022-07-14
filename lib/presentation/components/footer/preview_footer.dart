@@ -4,8 +4,10 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_app/presentation/components/components.dart';
+import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/theme/assets.dart';
 import 'package:training_app/presentation/theme/colors.dart';
 import 'package:training_app/presentation/theme/style.dart';
@@ -23,7 +25,10 @@ class PreviewFooter extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-              left: AppStyles.horizontalMargin, bottom: 20),
+            top: 90,
+            left: AppStyles.horizontalMargin,
+            bottom: 20,
+          ),
           child: Image.asset(
             AppAssets.logo,
             width: 120,
@@ -47,12 +52,18 @@ class PreviewFooter extends StatelessWidget {
               padding: const EdgeInsets.only(top: 20),
               child: Transform.rotate(
                 angle: pi,
-                child: CustomPaint(
-                  size: const Size(double.maxFinite, 200),
-                  painter: ShapeBackgroundPainter(
-                      color: themeColor == null
-                          ? AppColors.lightBlue
-                          : Color(themeColor!)),
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    var color =
+                        ref.watch(profileHeaderController).data?.getThemeColor;
+                    return CustomPaint(
+                      size: const Size(double.maxFinite, 200),
+                      painter: ShapeBackgroundPainter(
+                          color: color == null
+                              ? AppColors.lightBlue
+                              : Color(color)),
+                    );
+                  },
                 ),
               ),
             ),

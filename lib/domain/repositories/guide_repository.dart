@@ -1,6 +1,6 @@
 import 'package:training_app/domain/entities/entity.dart';
 
-abstract class GuideRepository{
+abstract class GuideRepository {
   Future<ObjectResponse<Account>> getUserDetailInfor();
   Future<ObjectResponse<Account>> getUserShortInfor({
     required String username,
@@ -12,6 +12,14 @@ abstract class GuideRepository{
   });
 
   Future<ObjectResponse<bool>> updateUserInfor({
-    required Map<String,dynamic> body,
+    required Map<String, dynamic> body,
+  });
+
+  Future<ListResponse<Destinations>> getUserDestinations({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+    required int page,
+    int limit = 10, //items per page
   });
 }

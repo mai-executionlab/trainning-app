@@ -4,7 +4,7 @@ import 'package:training_app/injection.dart';
 import 'package:training_app/shared_pref.dart';
 
 @singleton
-class DioIntercepter extends Interceptor {
+class DioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // TODO: implement onRequest

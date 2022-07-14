@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_app/data/data_source/mock.dart';
@@ -14,8 +13,8 @@ class ProfileSkill extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: AppStyles.horizontalMargin),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
