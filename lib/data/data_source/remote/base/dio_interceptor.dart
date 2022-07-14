@@ -11,22 +11,16 @@ class DioIntercepter extends Interceptor {
     //no need token
 
     //need token
-    final token = getIt<SharedPref>().token;
+    var token = getIt<SharedPref>().token;
     // print('token ${getIt<SharedPref>().token}');
-
+    token =
+        'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5LCJqdGkiOiJlZWU2MTRlZjNhMTE4OWQwYjQ2OTI5YjE5NWMyOGZhNiIsImlhdCI6MTY1Nzc1NzE4NCwiZXhwIjoxNjU3ODQzNTg0fQ.J7G3lQfF6yWrEgFtw_GcQswzqQtm7Xqq6T7zuyBvgjo';
     final RequestOptions newOption = options
       ..headers.addAll(token != null ? {'Authorization': 'Bearer $token'} : {});
 
-    print('onRequest ${newOption.headers}');
+    print('onRequest ${newOption.headers} \n path ${newOption.path}');
     // handler.next(newOption);
     super.onRequest(newOption, handler);
-  }
-
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // TODO: implement onResponse
-    print('onResponse $response');
-    super.onResponse(response, handler);
   }
 
   // @override

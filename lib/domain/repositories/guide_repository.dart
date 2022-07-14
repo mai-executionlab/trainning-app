@@ -10,4 +10,8 @@ abstract class GuideRepository{
     required String primaryLanguage,
     required String secondLanguage,
   });
+
+  Future<ObjectResponse<bool>> updateUserInfor({
+    required Map<String,dynamic> body,
+  });
 }

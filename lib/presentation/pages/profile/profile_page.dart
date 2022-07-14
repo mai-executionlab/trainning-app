@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_app/domain/entities/entity.dart';
 import 'package:training_app/presentation/components/components.dart';
+import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 import 'package:training_app/presentation/pages/profile_edit/views/index.dart';
+import 'package:training_app/presentation/pages/profile_edit/views/profile_edit/profile_edit_controller.dart';
 
 import 'package:training_app/presentation/theme/theme.dart';
 
@@ -18,24 +20,41 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ref.watch(profileHeaderController.notifier).init();
-    ref.listen<Account?>(profileHeaderController, (previous, next) {
-      if (previous == null && next != null) {
-        // print('listen header');
-        ref.watch(profileHomeController.notifier).init(
-            username: next.username ?? '',
-            primaryLanguage: next.primaryLanguage?.code ?? 'ja',
-            secondLanguage: next.secondaryLanguage?.code ?? 'en');
-      }
-    });
-    final Account? account = ref.watch(profileHeaderController);
-    final currentLanguageCode = ref.watch(languageController.call(account));
+    ref.listen<PageStatus>(
+      profileHeaderController,
+      (previous, next) {
+        if (next.state == PageState.loaded) {
+          // print('listen header');
+          ref.watch(profileHomeController.notifier).init(
+              username: next.data.username ?? '',
+              primaryLanguage: next.data.primaryLanguage?.code ?? 'ja',
+              secondLanguage: next.data.secondaryLanguage?.code ?? 'en');
+        }
+        if (next.state == PageState.loading) {
+          print('check $previous');
+        }
+      },
+    );
+    final Account? account = ref.watch(profileHeaderController).data;
+
+    final currentLanguageCode = ref.watch(languageController);
+
     const tabbar = ProfileTab.values;
+
+    // print(account?.nickname);
+
     final header = ProfileHeader(
       account: account ?? Account(),
       currentLanguage: currentLanguageCode,
-      onTapSetting: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const ProfileSetting()));
+      onTapSetting: () async {
+        ref.read(profileEditController.notifier).fetchData();
+        var result = await Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => const ProfileEdit()));
+
+        if (result == true) {
+          print('reload');
+          ref.read(profileHeaderController.notifier).init();
+        }
       },
     );
 
@@ -54,7 +73,9 @@ class ProfilePage extends ConsumerWidget {
       }
     }
 
-    const footer = PreviewFooter();
+    final footer = PreviewFooter(
+      themeColor: account?.getThemeColor,
+    );
     return DefaultTabController(
       length: tabbar.length,
       child: Scaffold(

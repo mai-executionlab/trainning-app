@@ -15,3 +15,7 @@ export './account/account_service.dart';
 //guide
 export './guide/guide_request.dart';
 export './guide/guide_service.dart';
+
+//language
+export 'language/language_request.dart';
+export './language/language_service.dart';

@@ -17,9 +17,38 @@ class ProfileHome extends ConsumerWidget {
   // final GeneralInformation? generalInfor;
   @override
   Widget build(BuildContext context, ref) {
+    
     final GeneralInformation? generalInfor = ref.watch(profileHomeController);
+    ref.watch(profileHomeController.notifier).repositoryImpl;
+    final currentLanguageCode = ref.watch(languageController);
+    print(generalInfor?.travelOrganization);
+    Widget matchItem(GeneralInfor infor) {
+      switch (infor.inputType) {
+        case 'image':
+          return NetImage(
+              width: double.maxFinite,
+              height: 218,
+              imageUrl: infor.mediaUrl ?? '');
+        case 'heading':
+          return infor.value?[currentLanguageCode.first] != null
+              ? Text(
+                  infor.value?[currentLanguageCode.first] ?? '',
+                  style: TextStyles.mediumBold.copyWith(color: AppColors.black),
+                )
+              : const SizedBox();
+        case 'description':
+          return infor.value?[currentLanguageCode.first] != null
+              ? Text(
+                  infor.value?[currentLanguageCode.first] ?? '',
+                  style: TextStyles.mediumRegular
+                      .copyWith(height: 20 / 14, color: AppColors.brand2),
+                )
+              : const SizedBox();
 
-    final currentLanguageCode = ref.watch(languageController.call(Account()));
+        default:
+          return const SizedBox();
+      }
+    }
 
     return generalInfor == null
         ? const SizedBox(height: 20)
@@ -52,46 +81,66 @@ class ProfileHome extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 15),
-                Text(
-                  generalInfor.generalInfors
-                          ?.firstWhere(
-                              (element) => element.inputType == 'heading')
-                          .value?[currentLanguageCode[0]] ??
-                      '',
-                  style: TextStyles.mediumBold,
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) =>
+                      matchItem(generalInfor.generalInfors![index]),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                  itemCount: generalInfor.generalInfors?.length ?? 0,
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  generalInfor.generalInfors
-                          ?.firstWhere(
-                              (element) => element.inputType == 'description')
-                          .value?[currentLanguageCode[0]] ??
-                      '',
-                  style: TextStyles.mediumRegular
-                      .copyWith(height: 20 / 14, color: AppColors.brand2),
-                ),
+                // Text(
+                //   generalInfor.generalInfors
+                //           ?.firstWhere(
+                //               (element) => element.inputType == 'heading')
+                //           .value?[currentLanguageCode[0]] ??
+                //       '',
+                //   style: TextStyles.mediumBold,
+                // ),
                 // const SizedBox(height: 20),
-                Column(
-                  children: generalInfor.generalInfors
-                          ?.where((element) => element.inputType == 'image')
-                          .map((e) => Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: NetImage(
-                                    width: double.maxFinite,
-                                    height: 218,
-                                    imageUrl: e.mediaUrl ?? ''),
-                              ))
-                          .toList() ??
-                      [],
-                ),
+                // Text(
+                //   generalInfor.generalInfors
+                //           ?.firstWhere(
+                //               (element) => element.inputType == 'description')
+                //           .value?[currentLanguageCode[0]] ??
+                //       '',
+                //   style: TextStyles.mediumRegular
+                //       .copyWith(height: 20 / 14, color: AppColors.brand2),
+                // ),
+                // // const SizedBox(height: 20),
+                // Column(
+                //   children: generalInfor.generalInfors
+                //           ?.where((element) => element.inputType == 'image')
+                //           .map((e) => Padding(
+                //                 padding: const EdgeInsets.only(top: 20),
+                //                 child: NetImage(
+                //                     width: double.maxFinite,
+                //                     height: 218,
+                //                     imageUrl: e.mediaUrl ?? ''),
+                //               ))
+                //           .toList() ??
+                //       [],
+                // ),
                 const SizedBox(height: 20),
                 ////////////////////// organizations & language skills
-                Column(
-                    children: generalInfor
-                            .travelOrganization?[currentLanguageCode[0]]
-                            ?.map((org) => buildOrganization(org))
-                            .toList() ??
-                        []),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => buildOrganization(
+                        generalInfor.travelOrganization?[
+                                currentLanguageCode.first]![index] ??
+                            'abc'),
+                    itemCount: generalInfor
+                            .travelOrganization?[currentLanguageCode.first]
+                            ?.length ??
+                        0),
+                // Column(
+                //     children: generalInfor
+                //             .travelOrganization?[currentLanguageCode[0]]
+                //             ?.map((org) => buildOrganization(org))
+                //             .toList() ??
+                //         []),
                 const SizedBox(height: 15),
                 ListView.separated(
                   shrinkWrap: true,

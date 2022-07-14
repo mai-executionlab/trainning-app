@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:training_app/domain/entities/entity.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
-class DropDownSelection extends StatelessWidget {
-  const DropDownSelection({Key? key, this.height = 48, this.list = const []})
-      : super(key: key);
+class DropDownSelection<T> extends StatelessWidget {
+  const DropDownSelection({
+    Key? key,
+    this.height = 48,
+    this.list = const [],
+    this.hint,
+    this.onChange,
+    this.initValue,
+  }) : super(key: key);
 
   final double height;
-  final List<String> list;
+  final List<T> list;
+  final String? hint;
+  final Function(T?)? onChange;
+  final T? initValue;
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -19,8 +29,9 @@ class DropDownSelection extends StatelessWidget {
     return SizedBox(
       height: height,
       child: DropdownButtonFormField(
+        value: initValue,
         hint: Text(
-          '選択してください',
+          hint == null || hint!.isEmpty ? '選択してください' : hint!,
           style: TextStyles.largRegular.copyWith(color: AppColors.black),
         ),
         icon: SvgPicture.asset(
@@ -34,12 +45,16 @@ class DropDownSelection extends StatelessWidget {
           enabledBorder: border, focusedBorder: border,
         ),
         items: list
-            .map((e) => DropdownMenuItem<String>(
+            .map((e) => DropdownMenuItem<T>(
                   value: e,
-                  child: Text(e),
+                  child: Text(e is Language
+                      ? e.name!
+                      : e is Gender
+                          ? e.getValue
+                          : e.toString()),
                 ))
             .toList(),
-        onChanged: (value) {},
+        onChanged: onChange,
       ),
     );
   }

@@ -18,10 +18,17 @@ class GuideRequest {
     required String secondLanguage,
   }) =>
       DioRequest(
-          httpMethod: HttpMethod.get,
-          path: '/guides/$username/general_info',
-          parameters: {
-            'primary_language_code': primaryLanguage,
-            'secondary_language_code': secondLanguage,
-          });
+        httpMethod: HttpMethod.get,
+        path: '/guides/$username/general_info',
+        parameters: {
+          'primary_language_code': primaryLanguage,
+          'secondary_language_code': secondLanguage,
+        },
+      );
+
+  static DioRequest updateUserInfor({ required Map<String, dynamic> body}) => DioRequest(
+        httpMethod: HttpMethod.put,
+        path: '/guides/me',
+        body: body,
+      );
 }

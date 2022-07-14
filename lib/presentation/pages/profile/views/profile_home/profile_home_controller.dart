@@ -25,5 +25,7 @@ class ProfileHomeNotifier extends StateNotifier<GeneralInformation?> {
 }
 
 final profileHomeController =
-    StateNotifierProvider<ProfileHomeNotifier, GeneralInformation?>((ref) =>
+    StateNotifierProvider.autoDispose<ProfileHomeNotifier, GeneralInformation?>((ref) =>
         ProfileHomeNotifier(repositoryImpl: ref.watch(guideRepoProvider)));
+
+

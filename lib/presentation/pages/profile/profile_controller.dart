@@ -8,12 +8,12 @@ import 'package:training_app/presentation/theme/theme.dart';
 
 final tabController = StateProvider<int>((ref) => 0);
 
-final languageController = Provider.family<List<String>, Account?>((ref, args) {
-  // final account = ref.watch(profileHeaderController);
+final languageController = Provider.autoDispose<List<String>>((ref) {
+  final account = ref.watch(profileHeaderController).data;
   final currentLanguage = ref.watch(toggleLanguageController);
   List<String> languages = [
-    args?.primaryLanguage?.code ?? 'ja',
-    args?.secondaryLanguage?.code ?? 'en'
+    account?.primaryLanguage?.code ?? 'ja',
+    account?.secondaryLanguage?.code ?? 'en'
   ];
   if (currentLanguage[0] == false) {
     return languages.reversed.toList();
@@ -85,26 +85,33 @@ final tabHomeController =
   },
 );
 
-enum PageState {
-  init,
-  loading,
-  loaded,
-  error,
-}
-
-class ProfileHeaderNotifier extends StateNotifier<Account?> {
+class ProfileHeaderNotifier extends StateNotifier<PageStatus<Account>> {
   final GuideRepositoryImpl repositoryImpl;
   ProfileHeaderNotifier({
     required this.repositoryImpl,
-  }) : super(null);
+  }) : super(PageStatus<Account>(PageState.init));
 
-  init() async {
+  Future init() async {
+    state = PageStatus(PageState.loading);
     var result = await repositoryImpl.getUserDetailInfor();
+    // Account account = result.object;
 
-    state = result.object;
+    var result2 = await repositoryImpl.getUserShortInfor(
+        username: result.object.username!);
+    Account account = result2.object;
+    // account.avatarUrl = result2.object.avatarUrl;
+    // account.coverImageUrl = result2.object.coverImageUrl;
+
+    state = PageStatus(PageState.loaded, data: account);
   }
+
+  // fetchData({required String username}) async {
+  //   var result2 = await repositoryImpl.getUserShortInfor(username: username);
+  //   state.data.account.avatarUrl = result2.object.avatarUrl;
+  //   state.data.coverImageUrl = result2.object.coverImageUrl;
+  // }
 }
 
 final profileHeaderController =
-    StateNotifierProvider<ProfileHeaderNotifier, Account?>((ref) =>
+    StateNotifierProvider.autoDispose<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
         ProfileHeaderNotifier(repositoryImpl: ref.watch(guideRepoProvider)));

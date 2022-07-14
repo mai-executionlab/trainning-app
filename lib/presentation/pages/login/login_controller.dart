@@ -3,6 +3,8 @@ import 'package:riverpod/riverpod.dart';
 import 'package:training_app/data/data_source/remote/index.dart';
 import 'package:training_app/data/repository_impl/auth_repository_impl.dart';
 import 'package:training_app/data/repository_impl/repository_provider.dart';
+import 'package:training_app/injection.dart';
+import 'package:training_app/shared_pref.dart';
 
 enum AuthStatus { init, processing, success, fail, empty }
 
@@ -56,6 +58,6 @@ class LoginNotifier extends StateNotifier<AuthState> {
   }
 }
 
-final loginProvider = StateNotifierProvider<LoginNotifier, AuthState>((ref) {
+final loginController = StateNotifierProvider.autoDispose<LoginNotifier, AuthState>((ref) {
   return LoginNotifier(repositoryImpl: ref.watch(authRepoProvider));
 });

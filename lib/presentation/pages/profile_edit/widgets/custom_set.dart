@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:training_app/presentation/components/components.dart';
-import 'package:training_app/presentation/pages/controller.dart';
-import 'package:training_app/presentation/pages/profile_edit/profile_edit_controller.dart';
 import 'package:training_app/presentation/pages/profile_edit/widgets/label.dart';
 
+//dont have toggle language
 class CustomSet extends StatelessWidget {
   CustomSet({
     Key? key,
@@ -14,7 +12,7 @@ class CustomSet extends StatelessWidget {
     this.hint,
     this.maxLength,
     Widget? child,
-    this.bilingual = true,
+    // this.bilingual = true,
   })  : _child = child ??
             InputText(
               controller: controller!,
@@ -30,7 +28,7 @@ class CustomSet extends StatelessWidget {
   final int? maxLength;
   final Widget _child;
 
-  final bool bilingual;
+  // final bool bilingual;
 
   @override
   Widget build(BuildContext context) {
@@ -45,24 +43,6 @@ class CustomSet extends StatelessWidget {
                 label: label,
                 isRequired: isRequired,
               ),
-              if (bilingual)
-                Consumer(builder: (context, ref, child) {
-                  final currentLanguage =
-                      ref.watch(toggleLanguageEditController);
-                  return ToggleButton2(
-                    left: '日本語',
-                    right: '〇〇語',
-                    isSelected: currentLanguage,
-                    onPressed: (index) {
-                      ref.read(textFieldController).text ='abc';
-                      if (!currentLanguage[index]) {
-                        ref
-                            .read(toggleLanguageEditController.notifier)
-                            .onToggle(index: index);
-                      }
-                    },
-                  );
-                }),
             ],
           ),
         ),

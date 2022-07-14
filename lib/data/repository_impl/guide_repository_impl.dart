@@ -28,4 +28,9 @@ class GuideRepositoryImpl extends GuideRepository {
     required String username,
   }) =>
       _guideService.getUserShortInfor(username: username);
+
+  @override
+  Future<ObjectResponse<bool>> updateUserInfor(
+          {required Map<String, dynamic> body}) =>
+      _guideService.updateUserInfor(body: body);
 }

@@ -30,13 +30,13 @@ class BorderAvatar extends StatelessWidget {
             ? Container(
                 height: size,
                 width: size,
-                color: AppColors.greyBackground,
-                child: Center(
-                  child: SvgPicture.asset(
-                    AppAssets.user,
-                    height: 24,
-                  ),
-                ),
+                // color: AppColors.greyBackground,
+                // child: Center(
+                //   child: SvgPicture.asset(
+                //     AppAssets.user,
+                //     height: 24,
+                //   ),
+                // ),
               )
             : NetImage(
                 height: size,

@@ -22,13 +22,16 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> globalKey = GlobalKey();
     Size size = MediaQuery.of(context).size;
-
+    print(account.profileThemeColor);
     return Stack(
       children: [
         Positioned.fill(
           child: CustomPaint(
             // size: Size.square(size.width),
-            painter: ShapeBackgroundPainter(color: AppColors.lightBlue),
+            painter: ShapeBackgroundPainter(
+                color: account.getThemeColor == null
+                    ? AppColors.lightBlue
+                    : Color(account.getThemeColor!)),
           ),
         ),
         Column(
@@ -70,13 +73,14 @@ class ProfileHeader extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(
                     horizontal: AppStyles.horizontalMargin, vertical: 20),
                 height: 28,
-                width: 71 * 2,
+                // width: 71 * 2,
                 decoration: ShapeDecoration(
                     color: AppColors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4))),
-                child: Consumer(builder: (context, ref, child) {
-                  return ToggleButtons(
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    return ToggleButtons(
                       // borderColor: AppColors.white,
                       onPressed: (index) {
                         final current = ref.watch(toggleLanguageController);
@@ -93,8 +97,9 @@ class ProfileHeader extends StatelessWidget {
                       color: const Color(0xFF666666),
                       borderRadius: BorderRadius.circular(4),
                       children: [
-                        SizedBox(
-                          width: 71,
+                        Container(
+                          // width: 71,
+                          padding: const EdgeInsets.symmetric(horizontal: 7),
                           child: Center(
                             child: Text(
                               account.primaryLanguage?.name ?? '',
@@ -103,18 +108,21 @@ class ProfileHeader extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 71,
+                        Container(
+                          // width: 71,
+                          padding: const EdgeInsets.symmetric(horizontal: 7),
                           child: Center(
                             child: Text(
-                              account.secondaryLanguage?.name ?? '',
+                              (account.secondaryLanguage?.name ?? ''),
                               style: TextStyles.smallRegular
                                   .copyWith(fontSize: 13),
                             ),
                           ),
                         )
-                      ]);
-                }),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
             ///////////////end language toggle button

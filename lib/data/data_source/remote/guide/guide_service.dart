@@ -43,4 +43,15 @@ class GuideService {
 
     return ObjectResponse(object: object);
   }
+
+  Future<ObjectResponse<bool>> updateUserInfor({
+    required Map<String, dynamic> body,
+  }) async {
+    print(body);
+    final DioRequest request = GuideRequest.updateUserInfor(body: body);
+
+    final DioResponse response = await dioClient.execute(request: request);
+
+    return ObjectResponse(object: response.message == 'ok');
+  }
 }

@@ -28,8 +28,8 @@ class Account {
   final int? id;
   final String? email;
   final String? username;
-  final String? avatarUrl;
-  final String? coverImageUrl;
+  String? avatarUrl;
+  String? coverImageUrl;
   // final BilingualObject? firstName;
   // final BilingualObject? lastName;
   // final BilingualObject? name;
@@ -57,8 +57,8 @@ class Account {
       'id': id,
       'email': email,
       'username': username,
-      'avatarUrl': avatarUrl,
-      'coverImageUrl': coverImageUrl,
+      'avatar_url': avatarUrl,
+      'cover_image_url': coverImageUrl,
       'first_name': firstName,
       'last_name': lastName,
       'name': name,
@@ -97,8 +97,8 @@ class Account {
       // title: json['title'] != null
       //     ? BilingualObject.fromJson(json['title'])
       //     : null,
-      avatarUrl: json['avatarUrl'],
-      coverImageUrl: json['coverImageUrl'],
+      avatarUrl: json['avatar_url'],
+      coverImageUrl: json['cover_image_url'],
       firstName: json['first_name'],
       lastName: json['last_name'],
       name: json['name'],
@@ -121,4 +121,41 @@ class Account {
       publishing: json['publishing'],
     );
   }
+
+  int? get getThemeColor =>
+      int.tryParse('FF${profileThemeColor?.substring(1)}', radix: 16);
+
+  Gender mapGender() {
+    switch (gender) {
+      case 'male':
+        return Gender.male;
+      case 'female':
+        return Gender.female;
+      default:
+        return Gender.others;
+    }
+  }
+}
+
+enum Gender {
+  male,
+  female,
+  others,
+}
+
+extension GenderExtension on Gender {
+  String get getValue {
+    switch (this) {
+      case Gender.male:
+        return '男性';
+      case Gender.female:
+        return '女性';
+      default:
+        return 'その他';
+    }
+  }
+}
+
+extension StringExtension on String {
+  int? get colorValue => int.tryParse('FF${substring(1)}', radix: 16);
 }

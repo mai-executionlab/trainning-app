@@ -11,8 +11,11 @@ import 'package:training_app/presentation/theme/colors.dart';
 import 'package:training_app/presentation/theme/style.dart';
 
 class PreviewFooter extends StatelessWidget {
-  const PreviewFooter({Key? key}) : super(key: key);
-
+  const PreviewFooter({
+    Key? key,
+    this.themeColor,
+  }) : super(key: key);
+  final int? themeColor;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,7 +49,10 @@ class PreviewFooter extends StatelessWidget {
                 angle: pi,
                 child: CustomPaint(
                   size: const Size(double.maxFinite, 200),
-                  painter: ShapeBackgroundPainter(),
+                  painter: ShapeBackgroundPainter(
+                      color: themeColor == null
+                          ? AppColors.lightBlue
+                          : Color(themeColor!)),
                 ),
               ),
             ),
