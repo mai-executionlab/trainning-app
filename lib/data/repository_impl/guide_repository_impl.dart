@@ -75,4 +75,27 @@ class GuideRepositoryImpl extends GuideRepository {
         username: username,
         page: page,
       );
+
+  @override
+  Future<ListResponse<Photo>> getUserMedium({
+    required String username,
+    required int page,
+    int limit = 10,
+  }) =>
+      _guideService.getUserMedium(
+        username: username,
+        page: page,
+      );
+
+  @override
+  Future<ObjectResponse<Skill>> getUserSkills({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+  }) =>
+      _guideService.getUserSkills(
+        username: username,
+        primaryLanguage: primaryLanguage,
+        secondLanguage: secondLanguage,
+      );
 }

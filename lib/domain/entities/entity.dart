@@ -15,3 +15,5 @@ export './destination.dart';
 export './activity.dart';
 
 export './photo.dart';
+
+export './skill.dart';

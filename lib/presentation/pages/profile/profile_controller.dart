@@ -104,10 +104,8 @@ class ProfileHeaderNotifier extends StateNotifier<PageStatus<Account>> {
 
     state = PageStatus(PageState.loaded, data: account);
   }
-
-  
 }
 
-final profileHeaderController = StateNotifierProvider
-    .autoDispose<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
+final profileHeaderController =
+    StateNotifierProvider<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
         ProfileHeaderNotifier(repositoryImpl: ref.watch(guideRepoProvider)));

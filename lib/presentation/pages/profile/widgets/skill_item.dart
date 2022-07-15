@@ -17,13 +17,19 @@ class SkillItem extends StatelessWidget {
     return Container(
       height: 72,
       padding: const EdgeInsets.only(left: 16, right: 26),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: ShapeDecoration(
-          color: AppColors.white,
-          shadows: [
-            BoxShadow(blurRadius: 2, color: AppColors.black.withOpacity(0.2))
-          ],
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0))),
+        color: AppColors.white,
+        shadows: [
+          BoxShadow(
+            blurRadius: 2,
+            color: AppColors.black.withOpacity(0.2),
+          )
+        ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+        ),
+      ),
       child: Row(
         children: [
           SvgPicture.asset(

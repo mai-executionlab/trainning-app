@@ -8,6 +8,7 @@ import 'package:training_app/presentation/pages/profile/profile_controller.dart'
 import 'package:training_app/presentation/pages/profile/views/index.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_activity/profile_activity_controlller.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_photo/profile_photo_controller.dart';
+import 'package:training_app/presentation/pages/profile/views/profile_skill/profile_skill_controlller.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_spot/profile_spot_controller.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 
@@ -20,7 +21,7 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ref.watch(profileHeaderController.notifier).init();
+    
     ref.listen<PageStatus>(
       profileHeaderController,
       (previous, next) async {
@@ -29,21 +30,25 @@ class ProfilePage extends ConsumerWidget {
           var username = next.data.username ?? '';
           var language1 = next.data.primaryLanguage?.code ?? 'ja';
           var language2 = next.data.secondaryLanguage?.code ?? 'en';
-          ref.watch(profileHomeController.notifier).init(
+          ref.read(profileHomeController.notifier).init(
               username: username,
               primaryLanguage: language1,
               secondLanguage: language2);
 
           await Future.wait([
-            ref.watch(profileDestinationController.notifier).init(
+            ref.read(profileDestinationController.notifier).init(
                 username: username,
                 primaryLanguage: language1,
                 secondLanguage: language2),
-            ref.watch(profileActivityController.notifier).init(
+            ref.read(profileActivityController.notifier).init(
                 username: username,
                 primaryLanguage: language1,
                 secondLanguage: language2),
-            ref.watch(profilePhotoController.notifier).init(username: username),
+            ref.read(profilePhotoController.notifier).init(username: username),
+            ref.read(profileSkillController.notifier).init(
+                username: username,
+                primaryLanguage: language1,
+                secondLanguage: language2),
           ]);
            ref.read(photoTypeController.state).state = PhotoType.byDate;
           // GuideService guideService =

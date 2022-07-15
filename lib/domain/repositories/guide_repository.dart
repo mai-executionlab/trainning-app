@@ -36,4 +36,16 @@ abstract class GuideRepository {
     required int page,
     int limit = 10, //items per page
   });
+
+  Future<ListResponse<Photo>> getUserMedium({
+    required String username,
+    required int page,
+    int limit = 10, //items per page
+  });
+
+  Future<ObjectResponse<Skill>> getUserSkills({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+  });
 }

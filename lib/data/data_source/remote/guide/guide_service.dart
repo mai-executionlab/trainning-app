@@ -55,19 +55,20 @@ class GuideService {
     return ObjectResponse(object: response.message == 'ok');
   }
 
-  Future<ObjectResponse> getUserSkills({
+  Future<ObjectResponse<Skill>> getUserSkills({
     required String username,
     required String primaryLanguage,
     required String secondLanguage,
   }) async {
     final DioRequest request = GuideRequest.getUserSkills(
-        username: username,
-        primaryLanguage: primaryLanguage,
-        secondLanguage: secondLanguage);
+      username: username,
+      primaryLanguage: primaryLanguage,
+      secondLanguage: secondLanguage,
+    );
 
     final DioResponse response = await dioClient.execute(request: request);
-    print(response.data);
-    return ObjectResponse(object: response.message == 'ok');
+    Skill object = Skill.fromJson(response.data);
+    return ObjectResponse(object: object);
   }
 
   Future<ListResponse<Destinations>> getUserDestinations({
@@ -86,8 +87,6 @@ class GuideService {
     final DioResponse response = await dioClient.execute(request: request);
     List<Destinations> list =
         response.toList().map((e) => Destinations.fromJson(e)).toList();
-    print(list.length);
-    print(list[0]);
     return ListResponse(list: list);
   }
 
@@ -98,7 +97,6 @@ class GuideService {
     required int page,
     int limit = 10, //items per page
   }) async {
-
     final DioRequest request = GuideRequest.getUserActivities(
       username: username,
       primaryLanguage: primaryLanguage,
@@ -110,8 +108,6 @@ class GuideService {
 
     List<Activity> list =
         response.toList().map((e) => Activity.fromJson(e)).toList();
-
-    print(response.data);
     return ListResponse(list: list);
   }
 
@@ -120,7 +116,6 @@ class GuideService {
     required int page,
     int limit = 10, //items per page
   }) async {
-
     final DioRequest request = GuideRequest.getUserAlbums(
       username: username,
       page: page,
@@ -128,10 +123,25 @@ class GuideService {
 
     final DioResponse response = await dioClient.execute(request: request);
 
-    List<Photo> list =
-        response.toList().map((e) => Photo.fromJson(e)).toList();
-        
-    print(response.data);
+    List<Photo> list = response.toList().map((e) => Photo.fromJson(e)).toList();
+
+    return ListResponse(list: list);
+  }
+
+  Future<ListResponse<Photo>> getUserMedium({
+    required String username,
+    required int page,
+    int limit = 10, //items per page
+  }) async {
+    final DioRequest request = GuideRequest.getUserMedium(
+      username: username,
+      page: page,
+    );
+
+    final DioResponse response = await dioClient.execute(request: request);
+
+    List<Photo> list = response.toList().map((e) => Photo.fromJson(e)).toList();
+
     return ListResponse(list: list);
   }
 }

@@ -14,24 +14,12 @@ class ProfilePhoto extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    // var profilePhoto = ref.watch(profilePhotoController.notifier);
     List<MapEntry<String?, List<Photo?>>> listByTime =
         ref.watch(profilePhotoController.notifier).sortByTime();
     List<MapEntry<int?, List<Photo?>>> listByAlbums =
         ref.watch(profilePhotoController.notifier).sortByAlbums();
     var currentTab = ref.watch(photoTypeController);
 
-    // ref.listen<PageStatus>(
-    //   profilePhotoController,
-    //   (_, next) {
-    //     if (next.state == PageState.loaded) {
-    //       ref.read(photoTypeController.state).state = PhotoType.byAlbum;
-    //       listByTime = ref.watch(profilePhotoController.notifier).sortByTime();
-    //       listByAlbums =
-    //           ref.watch(profilePhotoController.notifier).sortByAlbums();
-    //     }
-    //   },
-    // );
     print(currentTab);
     return ListView(
       children: [

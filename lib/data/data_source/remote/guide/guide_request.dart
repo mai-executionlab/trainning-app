@@ -100,4 +100,18 @@ class GuideRequest {
           'limit': limit,
         },
       );
+
+  static DioRequest getUserMedium({
+    required String username,
+    required int page,
+    int limit = 10, //items per page
+  }) =>
+      DioRequest(
+        httpMethod: HttpMethod.get,
+        path: '/guides/$username/medium',
+        parameters: {
+          'page': page,
+          'limit': limit,
+        },
+      );
 }
