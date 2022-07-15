@@ -1,21 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:training_app/data/data_source/mock.dart';
+import 'package:training_app/domain/entities/entity.dart';
 import 'package:training_app/presentation/components/components.dart';
+import 'package:training_app/presentation/pages/profile/views/profile_activity/profile_activity_controlller.dart';
 import 'package:training_app/presentation/pages/profile/widgets/activity_item.dart';
-import 'package:training_app/presentation/pages/profile/widgets/skill_item.dart';
-import 'package:training_app/presentation/theme/style.dart';
+import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
-class ProfileActivity extends StatelessWidget {
+class ProfileActivity extends ConsumerWidget {
   const ProfileActivity({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    var profileActivity = ref.watch(profileActivityController);
+    List<Activity>? list = profileActivity.data;
     return ListView(
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const ProfileHeader(),
         Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: AppStyles.horizontalMargin),
@@ -47,10 +50,11 @@ class ProfileActivity extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => ActivityItem(
-                  time: listActivity[index]['time'],
-                  title: listActivity[index]['title'],
-                  content: listActivity[index]['content'],
-                  listImg: listImgActivity[index]['list_img'],
+                  time: list?[index].departureDate,
+                  title: list?[index].title,
+                  content: list?[index].description,
+                  listImg:
+                      list?[index].media?.map((e) => e.url!).toList() ?? [],
                 ),
             separatorBuilder: (context, index) => Container(
                   margin: const EdgeInsets.symmetric(
@@ -60,7 +64,8 @@ class ProfileActivity extends StatelessWidget {
                     painter: ShapeSeparatorPainter(),
                   ),
                 ),
-            itemCount: listActivity.length)
+            itemCount: list?.length ?? 0),
+        const PreviewFooter(),
       ],
     );
   }

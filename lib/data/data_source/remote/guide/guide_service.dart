@@ -1,5 +1,4 @@
 import 'package:training_app/data/data_source/remote/index.dart';
-import 'package:training_app/domain/entities/destination.dart';
 import 'package:training_app/domain/entities/entity.dart';
 
 class GuideService {
@@ -92,35 +91,47 @@ class GuideService {
     return ListResponse(list: list);
   }
 
-  Future<ListResponse> getUserActivities({
+  Future<ListResponse<Activity>> getUserActivities({
     required String username,
     required String primaryLanguage,
     required String secondLanguage,
     required int page,
     int limit = 10, //items per page
   }) async {
+
     final DioRequest request = GuideRequest.getUserActivities(
       username: username,
       primaryLanguage: primaryLanguage,
       secondLanguage: secondLanguage,
       page: page,
     );
+
     final DioResponse response = await dioClient.execute(request: request);
+
+    List<Activity> list =
+        response.toList().map((e) => Activity.fromJson(e)).toList();
+
     print(response.data);
-    return ListResponse(list: []);
+    return ListResponse(list: list);
   }
 
-  Future<ListResponse> getUserAlbums({
+  Future<ListResponse<Photo>> getUserAlbums({
     required String username,
     required int page,
     int limit = 10, //items per page
   }) async {
+
     final DioRequest request = GuideRequest.getUserAlbums(
       username: username,
       page: page,
     );
+
     final DioResponse response = await dioClient.execute(request: request);
+
+    List<Photo> list =
+        response.toList().map((e) => Photo.fromJson(e)).toList();
+        
     print(response.data);
-    return ListResponse(list: []);
+    return ListResponse(list: list);
   }
 }

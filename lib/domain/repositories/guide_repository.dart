@@ -22,4 +22,18 @@ abstract class GuideRepository {
     required int page,
     int limit = 10, //items per page
   });
+
+  Future<ListResponse<Activity>> getUserActivities({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+    required int page,
+    int limit = 10, //items per page
+  });
+
+  Future<ListResponse<Photo>> getUserAlbums({
+    required String username,
+    required int page,
+    int limit = 10, //items per page
+  });
 }

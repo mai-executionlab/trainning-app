@@ -11,3 +11,7 @@ export './account.dart';
 export 'general_information.dart';
 
 export './destination.dart';
+
+export './activity.dart';
+
+export './photo.dart';
