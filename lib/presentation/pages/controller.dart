@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ToggleBtn<T> {
@@ -8,7 +7,6 @@ class ToggleBtn<T> {
   });
   List<bool> isSelected;
   List<T> data;
-  
 }
 
 // class ToggleButtonNotifier<T> extends StateNotifier<ToggleBtn<T>> {
@@ -27,7 +25,6 @@ class ToggleBtn<T> {
 //     }
 //   }
 // }
-
 
 class ToggleButtonNotifier extends StateNotifier<List<bool>> {
   ToggleButtonNotifier(List<bool> current) : super(current);
@@ -57,4 +54,6 @@ class PageStatus<T> {
   PageStatus(this.state, {this.data});
   PageState state;
   T? data;
+
+  PageStatus<T> copyWith(PageState state) => PageStatus(state, data: data);
 }

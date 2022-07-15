@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
             if (preState?.status == AuthStatus.processing &&
                 state.status == AuthStatus.success) {
               // return FutureBuilder(builder: builder);
-              ref.watch(profileHeaderController.notifier).init();
+              ref.read(profileHeaderController.notifier).init();
               // if (mounted) {
               // Navigator.of(context)
               //     .push(MaterialPageRoute(builder: (_) => const ProfilePage()));

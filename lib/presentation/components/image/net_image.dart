@@ -53,7 +53,8 @@ class NetImage extends StatelessWidget {
         ),
         errorWidget: (context, url, error) =>
             errorWidget ??
-            SizedBox(
+            Container(
+              color: AppColors.greyBackground,
               width: width,
               height: height,
               child: const Center(

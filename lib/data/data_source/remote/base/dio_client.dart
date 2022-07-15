@@ -3,13 +3,13 @@ import 'package:training_app/data/data_source/remote/index.dart';
 
 class DioClient {
   final Dio _dio;
-  final DioIntercepter intercepter;
+  final DioInterceptor interceptor;
 
   DioClient({
     BaseURL baseURL = BaseURLs.demo,
-    required this.intercepter,
+    required this.interceptor,
   }) : _dio = Dio(BaseOptions(baseUrl: baseURL.url))
-          ..interceptors.add(intercepter);
+          ..interceptors.add(interceptor);
   Future<DioResponse> execute({
     required DioRequest request,
   }) async {

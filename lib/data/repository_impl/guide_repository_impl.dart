@@ -30,7 +30,72 @@ class GuideRepositoryImpl extends GuideRepository {
       _guideService.getUserShortInfor(username: username);
 
   @override
-  Future<ObjectResponse<bool>> updateUserInfor(
-          {required Map<String, dynamic> body}) =>
+  Future<ObjectResponse<bool>> updateUserInfor({
+    required Map<String, dynamic> body,
+  }) =>
       _guideService.updateUserInfor(body: body);
+
+  @override
+  Future<ListResponse<Destinations>> getUserDestinations({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+    required int page,
+    int limit = 10,
+  }) =>
+      _guideService.getUserDestinations(
+        username: username,
+        primaryLanguage: primaryLanguage,
+        secondLanguage: secondLanguage,
+        page: page,
+      );
+
+  @override
+  Future<ListResponse<Activity>> getUserActivities({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+    required int page,
+    int limit = 10,
+  }) =>
+      _guideService.getUserActivities(
+        username: username,
+        primaryLanguage: primaryLanguage,
+        secondLanguage: secondLanguage,
+        page: page,
+      );
+
+  @override
+  Future<ListResponse<Media>> getUserAlbums({
+    required String username,
+    required int page,
+    int limit = 10,
+  }) =>
+      _guideService.getUserAlbums(
+        username: username,
+        page: page,
+      );
+
+       @override
+  Future<ListResponse<Media>> getUserMedium({
+    required String username,
+    required int page,
+    int limit = 10,
+  }) =>
+      _guideService.getUserMedium(
+        username: username,
+        page: page,
+      );
+
+  @override
+  Future<ObjectResponse<Skill>> getUserSkills({
+    required String username,
+    required String primaryLanguage,
+    required String secondLanguage,
+  }) =>
+      _guideService.getUserSkills(
+        username: username,
+        primaryLanguage: primaryLanguage,
+        secondLanguage: secondLanguage,
+      );
 }

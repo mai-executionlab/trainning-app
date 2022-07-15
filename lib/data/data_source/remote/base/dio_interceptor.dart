@@ -4,7 +4,7 @@ import 'package:training_app/injection.dart';
 import 'package:training_app/shared_pref.dart';
 
 @singleton
-class DioIntercepter extends Interceptor {
+class DioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // TODO: implement onRequest
@@ -14,7 +14,7 @@ class DioIntercepter extends Interceptor {
     var token = getIt<SharedPref>().token;
     // print('token ${getIt<SharedPref>().token}');
     token =
-        'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5LCJqdGkiOiJlZWU2MTRlZjNhMTE4OWQwYjQ2OTI5YjE5NWMyOGZhNiIsImlhdCI6MTY1Nzc1NzE4NCwiZXhwIjoxNjU3ODQzNTg0fQ.J7G3lQfF6yWrEgFtw_GcQswzqQtm7Xqq6T7zuyBvgjo';
+    'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5LCJqdGkiOiIzODlmOWNlNzE0ZWEyOTI5NzQ0NjdmOGNlYjM5NTI2MSIsImlhdCI6MTY1Nzg0NTIyOSwiZXhwIjoxNjU3OTMxNjI5fQ.JrA_SybidP8HDM0kFsaFrmnzmp4EhzVRHLcYOtWQnkU';
     final RequestOptions newOption = options
       ..headers.addAll(token != null ? {'Authorization': 'Bearer $token'} : {});
 

@@ -104,14 +104,8 @@ class ProfileHeaderNotifier extends StateNotifier<PageStatus<Account>> {
 
     state = PageStatus(PageState.loaded, data: account);
   }
-
-  // fetchData({required String username}) async {
-  //   var result2 = await repositoryImpl.getUserShortInfor(username: username);
-  //   state.data.account.avatarUrl = result2.object.avatarUrl;
-  //   state.data.coverImageUrl = result2.object.coverImageUrl;
-  // }
 }
 
 final profileHeaderController =
-    StateNotifierProvider.autoDispose<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
+    StateNotifierProvider<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
         ProfileHeaderNotifier(repositoryImpl: ref.watch(guideRepoProvider)));

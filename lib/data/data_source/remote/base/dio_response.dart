@@ -4,12 +4,14 @@ class DioResponse {
     this.details,
     this.message,
     this.data,
+    this.meta,
   });
 
   final String? code;
   final List<dynamic>? details;
   final String? message;
   final dynamic data;
+  final dynamic meta;
 
   factory DioResponse.fromJson(Map<String, dynamic> json) {
     return DioResponse(
@@ -17,6 +19,7 @@ class DioResponse {
       details: json['details'],
       message: json['message'],
       data: json['data'],
+      meta: json['meta'],
     );
   }
 
@@ -24,6 +27,7 @@ class DioResponse {
     return DioResponse(
       message: json['message'],
       data: json['data'],
+      meta: json['meta'],
     );
   }
 
@@ -42,28 +46,28 @@ class DioResponse {
       'data': data,
     };
   }
+
+  List<Map<String, dynamic>> toList() {
+    return List<Map<String, dynamic>>.from(data);
+  }
 }
 
-
-class DioErrorResponse{
+class DioErrorResponse {
   DioErrorResponse({
     this.code,
     this.details,
     this.message,
- 
   });
 
   final String? code;
   final List<dynamic>? details;
   final String? message;
 
-
   factory DioErrorResponse.fromJson(Map<String, dynamic> json) {
     return DioErrorResponse(
       code: json['code'],
       details: json['details'],
       message: json['message'],
-
     );
   }
 
