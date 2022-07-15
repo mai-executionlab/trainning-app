@@ -108,7 +108,7 @@ class GuideRequest {
   }) =>
       DioRequest(
         httpMethod: HttpMethod.get,
-        path: '/guides/$username/medium',
+        path: '/guides/$username/media',
         parameters: {
           'page': page,
           'limit': limit,

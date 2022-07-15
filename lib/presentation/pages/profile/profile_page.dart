@@ -21,7 +21,6 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     ref.listen<PageStatus>(
       profileHeaderController,
       (previous, next) async {
@@ -44,13 +43,15 @@ class ProfilePage extends ConsumerWidget {
                 username: username,
                 primaryLanguage: language1,
                 secondLanguage: language2),
-            ref.read(profilePhotoController.notifier).init(username: username),
+            ref.read(dateMediaController.notifier).init(username: username),
+            ref.read(albumMediaController.notifier).init(username: username),
             ref.read(profileSkillController.notifier).init(
                 username: username,
                 primaryLanguage: language1,
                 secondLanguage: language2),
           ]);
-           ref.read(photoTypeController.state).state = PhotoType.byDate;
+          ref.read(photoTypeController.state).state = MediaType.byDate;
+
           // GuideService guideService =
           //     GuideService(dioClient: ref.watch(dioProvider));
           // // guideService.getUserSkills(
@@ -96,7 +97,7 @@ class ProfilePage extends ConsumerWidget {
         case ProfileTab.activity:
           return const ProfileActivity();
         case ProfileTab.photo:
-          return const ProfilePhoto();
+          return const ProfileMedia();
       }
     }
 

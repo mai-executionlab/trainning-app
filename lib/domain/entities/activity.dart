@@ -4,7 +4,7 @@ class Activity {
   final String? description;
   final bool? isRecent;
   final bool? isPublic;
-  final List<Media>? media;
+  final List<ActivityMedia>? media;
   final String? departureDate;
   Activity({
     this.id,
@@ -36,15 +36,15 @@ class Activity {
       isRecent: map['is_recent'],
       isPublic: map['is_public'],
       media: map['media'] != null
-          ? List<Map<String, dynamic>>.from(map['media']).map((e) => Media.fromJson(e)).toList()
+          ? List<Map<String, dynamic>>.from(map['media']).map((e) => ActivityMedia.fromJson(e)).toList()
           : null,
       departureDate: map['departure_date'],
     );
   }
 }
 
-class Media {
-  Media({
+class ActivityMedia {
+  ActivityMedia({
     this.id,
     this.url,
     this.thumbnail,
@@ -62,8 +62,8 @@ class Media {
     };
   }
 
-  factory Media.fromJson(Map<String, dynamic> map) {
-    return Media(
+  factory ActivityMedia.fromJson(Map<String, dynamic> map) {
+    return ActivityMedia(
       id: map['id']?.toInt(),
       url: map['url'],
       thumbnail: map['thumbnail'],

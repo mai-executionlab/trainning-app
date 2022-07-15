@@ -14,8 +14,8 @@ class AlbumItem extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final List<Photo?> listImg;
-  final PhotoType type;
+  final List<Media?> listImg;
+  final MediaType type;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +23,7 @@ class AlbumItem extends StatelessWidget {
       children: [
         Text(
           title,
-          style:(type== PhotoType.byAlbum? TextStyles.mediumBold : TextStyles.largRegular) //14 bold vs 16 regular
+          style:(type== MediaType.byAlbum? TextStyles.mediumBold : TextStyles.largRegular) //14 bold vs 16 regular
               .copyWith(color: AppColors.black), // check type of album
         ),
         const SizedBox(height: 16),

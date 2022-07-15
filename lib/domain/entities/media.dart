@@ -1,11 +1,11 @@
-class Photo {
+class Media {
   final int? id;
   final String? name;
   final int? mediumId;
   final String? mediumAttachmentUrl;
   final String? mediumAttachmentType;
   final String? timeline;
-  Photo({
+  Media({
     this.id,
     this.name,
     this.mediumId,
@@ -25,13 +25,22 @@ class Photo {
     };
   }
 
-  factory Photo.fromJson(Map<String, dynamic> map) {
-    return Photo(
+  factory Media.fromAlbum(Map<String, dynamic> map) {
+    return Media(
       id: map['id']?.toInt(),
       name: map['name'],
       mediumId: map['medium_id']?.toInt(),
       mediumAttachmentUrl: map['medium_attachment_url'],
       mediumAttachmentType: map['medium_attachment_type'],
+      timeline: map['timeline'],
+    );
+  }
+
+  factory Media.fromJson(Map<String, dynamic> map) {
+    return Media(
+      id: map['id']?.toInt(),
+      mediumAttachmentUrl: map['attachment_url'],
+      mediumAttachmentType: map['attachment_type'],
       timeline: map['timeline'],
     );
   }

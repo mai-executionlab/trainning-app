@@ -2,25 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:training_app/domain/entities/photo.dart';
+import 'package:training_app/domain/entities/media.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_photo/profile_photo_controller.dart';
 import 'package:training_app/presentation/pages/profile/widgets/album_item.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
-class ProfilePhoto extends ConsumerWidget {
-  const ProfilePhoto({Key? key}) : super(key: key);
+class ProfileMedia extends ConsumerWidget {
+  const ProfileMedia({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ref) {
-    List<MapEntry<String?, List<Photo?>>> listByTime =
-        ref.watch(profilePhotoController.notifier).sortByTime();
-    List<MapEntry<int?, List<Photo?>>> listByAlbums =
-        ref.watch(profilePhotoController.notifier).sortByAlbums();
+    List<MapEntry<String?, List<Media?>>> listByTime =
+        ref.watch(dateMediaController.notifier).sortByTime();
+    List<MapEntry<int?, List<Media?>>> listByAlbums =
+        ref.watch(albumMediaController.notifier).sortByAlbums();
     var currentTab = ref.watch(photoTypeController);
 
-    print(currentTab);
+    print(listByTime.toString());
     return ListView(
       children: [
         const ProfileHeader(),
@@ -59,9 +59,9 @@ class ProfilePhoto extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      buildSelectType(type: PhotoType.byDate),
+                      buildSelectType(type: MediaType.byDate),
                       const SizedBox(width: 10),
-                      buildSelectType(type: PhotoType.byAlbum)
+                      buildSelectType(type: MediaType.byAlbum)
                     ],
                   )),
               const SizedBox(height: 25),
@@ -69,14 +69,14 @@ class ProfilePhoto extends ConsumerWidget {
                 index: currentTab == null ? 0 : photoType.indexOf(currentTab),
                 children: photoType.map(
                   (type) {
-                    var list = currentTab == PhotoType.byAlbum
+                    var list = currentTab == MediaType.byAlbum
                         ? listByAlbums
                         : listByTime;
                     return ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => AlbumItem(
-                        title: currentTab == PhotoType.byAlbum
+                        title: currentTab == MediaType.byAlbum
                             ? list[index].value[0]?.name ?? ''
                             : list[index].key?.toString() ?? '',
                         listImg: list[index].value,
@@ -97,7 +97,7 @@ class ProfilePhoto extends ConsumerWidget {
     );
   }
 
-  Widget buildSelectType({required PhotoType type}) {
+  Widget buildSelectType({required MediaType type}) {
     return Builder(
       builder: (context) {
         return Consumer(

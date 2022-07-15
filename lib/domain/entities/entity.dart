@@ -14,6 +14,6 @@ export './destination.dart';
 
 export './activity.dart';
 
-export './photo.dart';
+export './media.dart';
 
 export './skill.dart';

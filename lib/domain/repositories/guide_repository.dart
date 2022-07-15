@@ -31,13 +31,13 @@ abstract class GuideRepository {
     int limit = 10, //items per page
   });
 
-  Future<ListResponse<Photo>> getUserAlbums({
+  Future<ListResponse<Media>> getUserAlbums({
     required String username,
     required int page,
     int limit = 10, //items per page
   });
 
-  Future<ListResponse<Photo>> getUserMedium({
+  Future<ListResponse<Media>> getUserMedium({
     required String username,
     required int page,
     int limit = 10, //items per page

@@ -66,7 +66,7 @@ class GuideRepositoryImpl extends GuideRepository {
       );
 
   @override
-  Future<ListResponse<Photo>> getUserAlbums({
+  Future<ListResponse<Media>> getUserAlbums({
     required String username,
     required int page,
     int limit = 10,
@@ -76,8 +76,8 @@ class GuideRepositoryImpl extends GuideRepository {
         page: page,
       );
 
-  @override
-  Future<ListResponse<Photo>> getUserMedium({
+       @override
+  Future<ListResponse<Media>> getUserMedium({
     required String username,
     required int page,
     int limit = 10,

@@ -111,7 +111,7 @@ class GuideService {
     return ListResponse(list: list);
   }
 
-  Future<ListResponse<Photo>> getUserAlbums({
+  Future<ListResponse<Media>> getUserAlbums({
     required String username,
     required int page,
     int limit = 10, //items per page
@@ -123,12 +123,12 @@ class GuideService {
 
     final DioResponse response = await dioClient.execute(request: request);
 
-    List<Photo> list = response.toList().map((e) => Photo.fromJson(e)).toList();
+    List<Media> list = response.toList().map((e) => Media.fromAlbum(e)).toList();
 
     return ListResponse(list: list);
   }
 
-  Future<ListResponse<Photo>> getUserMedium({
+  Future<ListResponse<Media>> getUserMedium({
     required String username,
     required int page,
     int limit = 10, //items per page
@@ -140,7 +140,7 @@ class GuideService {
 
     final DioResponse response = await dioClient.execute(request: request);
 
-    List<Photo> list = response.toList().map((e) => Photo.fromJson(e)).toList();
+    List<Media> list = response.toList().map((e) => Media.fromJson(e)).toList();
 
     return ListResponse(list: list);
   }
