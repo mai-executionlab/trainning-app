@@ -11,6 +11,7 @@ import 'package:training_app/presentation/theme/theme.dart';
 class ProfileActivity extends ConsumerWidget {
   const ProfileActivity({Key? key}) : super(key: key);
 
+  
   @override
   Widget build(BuildContext context, ref) {
     var profileActivity = ref.watch(profileActivityController);

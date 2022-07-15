@@ -27,16 +27,16 @@ class BorderAvatar extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(size / 2),
         child: imageUrl == null || imageUrl!.isEmpty
-            ? SizedBox(
+            ? Container(
                 height: size,
                 width: size,
-                // color: AppColors.greyBackground,
-                // child: Center(
-                //   child: SvgPicture.asset(
-                //     AppAssets.user,
-                //     height: 24,
-                //   ),
-                // ),
+                color: AppColors.greyBackground,
+                child: Center(
+                  child: SvgPicture.asset(
+                    AppAssets.user,
+                    height: 24,
+                  ),
+                ),
               )
             : NetImage(
                 height: size,

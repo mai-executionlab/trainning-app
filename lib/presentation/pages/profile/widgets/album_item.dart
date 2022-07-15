@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:training_app/domain/entities/entity.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_photo/profile_photo_controller.dart';
 import 'package:training_app/presentation/theme/colors.dart';
@@ -13,7 +14,7 @@ class AlbumItem extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final List<String> listImg;
+  final List<Photo?> listImg;
   final PhotoType type;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class AlbumItem extends StatelessWidget {
             itemBuilder: (context, index) => NetImage(
                   width: 107,
                   height: 107,
-                  imageUrl: listImg[index],
+                  imageUrl: listImg[index]?.mediumAttachmentUrl??'',
                   radius: 4,
                 ))
       ],

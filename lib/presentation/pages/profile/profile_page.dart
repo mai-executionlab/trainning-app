@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:training_app/data/data_source/remote/index.dart';
-import 'package:training_app/data/repository_impl/repository_provider.dart';
 import 'package:training_app/domain/entities/entity.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/controller.dart';
@@ -25,7 +23,7 @@ class ProfilePage extends ConsumerWidget {
     // ref.watch(profileHeaderController.notifier).init();
     ref.listen<PageStatus>(
       profileHeaderController,
-      (previous, next) {
+      (previous, next) async {
         if (next.state == PageState.loaded) {
           // print('listen header');
           var username = next.data.username ?? '';
@@ -36,7 +34,7 @@ class ProfilePage extends ConsumerWidget {
               primaryLanguage: language1,
               secondLanguage: language2);
 
-          Future.wait([
+          await Future.wait([
             ref.watch(profileDestinationController.notifier).init(
                 username: username,
                 primaryLanguage: language1,
@@ -45,15 +43,14 @@ class ProfilePage extends ConsumerWidget {
                 username: username,
                 primaryLanguage: language1,
                 secondLanguage: language2),
-            ref.watch(profilePhotoController.notifier).init(
-                  username: username,
-                ),
+            ref.watch(profilePhotoController.notifier).init(username: username),
           ]);
-          GuideService guideService =
-              GuideService(dioClient: ref.watch(dioProvider));
+           ref.read(photoTypeController.state).state = PhotoType.byDate;
+          // GuideService guideService =
+          //     GuideService(dioClient: ref.watch(dioProvider));
           // // guideService.getUserSkills(
           // //     username: 'hang', primaryLanguage: 'ja', secondLanguage: 'en');
-          guideService.getUserAlbums(username: 'hang', page: 1);
+          // guideService.getUserAlbums(username: 'hang', page: 1);
           // // guideService.getUserDestinations(
           // //     username: 'hang',
           // //     primaryLanguage: 'ja',

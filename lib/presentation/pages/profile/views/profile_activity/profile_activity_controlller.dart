@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:training_app/data/repository_impl/guide_repository_impl.dart';
 import 'package:training_app/data/repository_impl/repository_provider.dart';
@@ -25,7 +26,6 @@ class ProfileActivityNotifier
         primaryLanguage: primaryLanguage,
         secondLanguage: secondLanguage,
         page: _page);
-
     state = PageStatus(PageState.loaded, data: result.list);
   }
 }

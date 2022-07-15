@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:training_app/data/data_source/mock.dart';
-import 'package:training_app/domain/entities/entity.dart';
+import 'package:training_app/domain/entities/photo.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_photo/profile_photo_controller.dart';
 import 'package:training_app/presentation/pages/profile/widgets/album_item.dart';
@@ -15,9 +14,25 @@ class ProfilePhoto extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    // var profilePhoto = ref.watch(profilePhotoController.notifier);
+    List<MapEntry<String?, List<Photo?>>> listByTime =
+        ref.watch(profilePhotoController.notifier).sortByTime();
+    List<MapEntry<int?, List<Photo?>>> listByAlbums =
+        ref.watch(profilePhotoController.notifier).sortByAlbums();
+    var currentTab = ref.watch(photoTypeController);
 
-    var profileActivity = ref.watch(profilePhotoController);
-    List<Photo>? list = profileActivity.data;
+    // ref.listen<PageStatus>(
+    //   profilePhotoController,
+    //   (_, next) {
+    //     if (next.state == PageState.loaded) {
+    //       ref.read(photoTypeController.state).state = PhotoType.byAlbum;
+    //       listByTime = ref.watch(profilePhotoController.notifier).sortByTime();
+    //       listByAlbums =
+    //           ref.watch(profilePhotoController.notifier).sortByAlbums();
+    //     }
+    //   },
+    // );
+    print(currentTab);
     return ListView(
       children: [
         const ProfileHeader(),
@@ -62,25 +77,29 @@ class ProfilePhoto extends ConsumerWidget {
                     ],
                   )),
               const SizedBox(height: 25),
-               IndexedStack(
-                    index: photoType.indexOf(ref.watch(photoTypeController)),
-                    children: photoType
-                        .map((type) => ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => AlbumItem(
-                                  title: ref.watch(photoTypeController) ==
-                                          PhotoType.byAlbum
-                                      ? listContentPhoto[index]
-                                      : listActivity[index]['time'] ?? '',
-                                  listImg: listImgPhoto[index],
-                                  type: type,
-                                ),
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 40),
-                            itemCount: listSkill.length))
-                        .toList(),
-                        
+              IndexedStack(
+                index: currentTab == null ? 0 : photoType.indexOf(currentTab),
+                children: photoType.map(
+                  (type) {
+                    var list = currentTab == PhotoType.byAlbum
+                        ? listByAlbums
+                        : listByTime;
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => AlbumItem(
+                        title: currentTab == PhotoType.byAlbum
+                            ? list[index].value[0]?.name ?? ''
+                            : list[index].key?.toString() ?? '',
+                        listImg: list[index].value,
+                        type: type,
+                      ),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 40),
+                      itemCount: list.length,
+                    );
+                  },
+                ).toList(),
               )
             ],
           ),
