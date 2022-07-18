@@ -19,14 +19,12 @@ class ProfileHeader extends ConsumerWidget {
   }) : super(key: key);
 
   final VoidCallback? onTapSetting;
-  // final Account account;
-  // final List<String> currentLanguage;
+
   @override
   Widget build(BuildContext context, ref) {
     final currentLanguage = ref.watch(languageController);
     final Account? account = ref.watch(profileHeaderController).data;
-    Size size = MediaQuery.of(context).size;
-    // print(account?.profileThemeColor);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
       child: Stack(

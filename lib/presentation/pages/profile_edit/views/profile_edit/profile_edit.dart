@@ -26,16 +26,7 @@ class _ProfileEditState extends ConsumerState<ProfileEdit> {
   late TextEditingController titleController2;
 
   late TextEditingController themeColorController;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
 
-    // nicknameController = TextEditingController();
-    // emailController = TextEditingController();
-    // titleController = TextEditingController();
-    // phoneController = TextEditingController();
-  }
 
   @override
   void dispose() {
@@ -55,16 +46,11 @@ class _ProfileEditState extends ConsumerState<ProfileEdit> {
     // print(languages);
     final Account? account = ref.watch(profileEditController).data;
 
-    print(account?.nickname);
-    // account = ref.watch(profileHeaderController).data;
-    // listLanguage = ref.watch(languagesProvider).value?.list ?? [];
-
-    // privacy = privacyController.call(account?.publishing ?? false);
     ref.listen<PageStatus>(
       profileEditController,
       (previous, next) {
         if (next.state == PageState.loaded) {
-          print('edit loaded');
+   
           ref.read(primaryLanguageProvider.notifier).state =
               next.data?.primaryLanguage;
           ref.read(secondaryLanguageProvider.notifier).state =
@@ -95,10 +81,7 @@ class _ProfileEditState extends ConsumerState<ProfileEdit> {
     final privacy = privacyController.call(account?.publishing ?? false);
     String? gender = account?.gender;
 
-    // var checkUpdateButton = ref.watch(privacy)[0] == account?.publishing ||
-    //     ref.watch(primaryLanguageProvider) != account?.primaryLanguage ||
-    //     ref.watch(secondaryLanguageProvider) != account?.secondaryLanguage;
-    print(account?.nickname);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: CommonLayout(
@@ -348,39 +331,19 @@ class _ProfileEditState extends ConsumerState<ProfileEdit> {
                     "secondary_language_code": secondaryLanguage,
                   };
 
-                  // var result = await ref
-                  //     .read(guideRepoProvider)
-                  //     .updateUserInfor(body: body);
-                  // if (result.object) {
-                  //   Navigator.of(context).pop;
-                  // }
-                  print(body);
+       
                   ref
                       .read(guideRepoProvider)
                       .updateUserInfor(body: body)
                       .then((value) {
-                    // print("value.object == true ${value.object == true}");
+    
                     Navigator.of(context).pop();
                     if (value.object == true) {
-                      // ref.watch(acc)
-                      print(true);
+               
                       Navigator.of(context).pop(true);
                     }
                   });
 
-                  // if (result.object == true) {
-
-                  // }
-//                         print('''
-// ${ref.watch(primaryLanguageProvider)?.code},
-// ${ref.watch(secondaryLanguageProvider)?.code},
-// ${nicknameController1.text},
-// ${nicknameController2.text},
-// $gender,
-// ${emailController.text},
-// ${account?.contactEmail},
-// ${ref.watch(privacy)},
-// ''');
                 },
               ),
               const SizedBox(height: 32),

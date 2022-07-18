@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:training_app/presentation/components/button/toggle_button.dart';
 import 'package:training_app/presentation/components/components.dart';
-import 'package:training_app/presentation/pages/profile_edit/widgets/label.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 class CommonLayout extends StatelessWidget {
