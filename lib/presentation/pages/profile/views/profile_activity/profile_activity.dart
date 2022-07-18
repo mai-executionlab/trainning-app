@@ -7,11 +7,11 @@ import 'package:training_app/presentation/pages/profile/views/profile_activity/p
 import 'package:training_app/presentation/pages/profile/widgets/activity_item.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 import 'package:training_app/presentation/theme/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileActivity extends ConsumerWidget {
   const ProfileActivity({Key? key}) : super(key: key);
 
-  
   @override
   Widget build(BuildContext context, ref) {
     var profileActivity = ref.watch(profileActivityController);
@@ -28,7 +28,8 @@ class ProfileActivity extends ConsumerWidget {
             children: [
               Expanded(
                 child: Text(
-                  '最近の活動',
+                  // '最近の活動',
+                  AppLocalizations.of(context)!.activityTitle,
                   style: TextStyles.extraLargeBold,
                 ),
               ),
