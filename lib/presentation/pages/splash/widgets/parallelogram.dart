@@ -1,15 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
-class Parallelogram extends StatelessWidget {
-  const Parallelogram({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
 class ParallelogramPainter extends CustomPainter {
   final Color color;
