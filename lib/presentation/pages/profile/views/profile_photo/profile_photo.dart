@@ -20,7 +20,6 @@ class ProfileMedia extends ConsumerWidget {
         ref.watch(albumMediaController.notifier).sortByAlbums();
     var currentTab = ref.watch(photoTypeController);
 
-    print(listByTime.toString());
     return ListView(
       children: [
         const ProfileHeader(),

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:training_app/data/repository_impl/guide_repository_impl.dart';
 import 'package:training_app/data/repository_impl/repository_provider.dart';
@@ -70,13 +69,9 @@ class AlbumMediaNotifier extends StateNotifier<PageStatus<List<Media?>>> {
   }
 
   List<MapEntry<int?, List<Media?>>> sortByAlbums() =>
-      groupBy<Media?, int?>(state.data ?? [], (e) => e?.id).entries.toList();
-
-  // List<MapEntry<String?, List<Media?>>> sortByTime() =>
-  //     groupBy<Media?, String?>(state.data ?? [], (e) => e?.timeline)
-  //         .entries
-  //         .toList();
+      groupBy<Media?, int?>(state.data ?? [], (e) => e?.id);
 }
+
 final albumMediaController = StateNotifierProvider.autoDispose<
     AlbumMediaNotifier, PageStatus<List<Media?>>>(
   (ref) => AlbumMediaNotifier(
@@ -84,7 +79,14 @@ final albumMediaController = StateNotifierProvider.autoDispose<
   ),
 );
 
-
+List<MapEntry<T, List<S>>> groupBy<S, T>(
+    Iterable<S> values, T Function(S) key) {
+  var map = <T, List<S>>{};
+  for (var element in values) {
+    (map[key(element)] ??= []).add(element);
+  }
+  return map.entries.toList();
+}
 
 class DateMediaNotifier extends StateNotifier<PageStatus<List<Media?>>> {
   DateMediaNotifier({
@@ -112,13 +114,11 @@ class DateMediaNotifier extends StateNotifier<PageStatus<List<Media?>>> {
   //     groupBy<Media?, int?>(state.data ?? [], (e) => e?.id).entries.toList();
 
   List<MapEntry<String?, List<Media?>>> sortByTime() =>
-      groupBy<Media?, String?>(state.data ?? [], (e) => e?.timeline)
-          .entries
-          .toList();
+      groupBy<Media?, String?>(state.data ?? [], (e) => e?.timeline);
 }
 
-final dateMediaController = StateNotifierProvider.autoDispose<
-    DateMediaNotifier, PageStatus<List<Media?>>>(
+final dateMediaController = StateNotifierProvider.autoDispose<DateMediaNotifier,
+    PageStatus<List<Media?>>>(
   (ref) => DateMediaNotifier(
     repositoryImpl: ref.watch(guideRepoProvider),
   ),

@@ -116,6 +116,7 @@ class ProfilePage extends ConsumerWidget {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (_) => const LoginPage()),
                         (route) => false);
+                    ref.read(tabController.state).state = 0;
                   }
                 });
               },

@@ -18,30 +18,36 @@ class AlbumItem extends StatelessWidget {
   final MediaType type;
   @override
   Widget build(BuildContext context) {
+    var nonnullList = listImg
+        .where((element) => element?.mediumAttachmentUrl != null)
+        .toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style:(type== MediaType.byAlbum? TextStyles.mediumBold : TextStyles.largRegular) //14 bold vs 16 regular
+          style: (type == MediaType.byAlbum
+                  ? TextStyles.mediumBold
+                  : TextStyles.largRegular) //14 bold vs 16 regular
               .copyWith(color: AppColors.black), // check type of album
         ),
         const SizedBox(height: 16),
-        GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: listImg.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 3,
-              mainAxisSpacing: 3,
-            ),
-            itemBuilder: (context, index) => NetImage(
-                  width: 107,
-                  height: 107,
-                  imageUrl: listImg[index]?.mediumAttachmentUrl??'',
-                  radius: 4,
-                ))
+        if (nonnullList.isNotEmpty)
+          GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: nonnullList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 3,
+                mainAxisSpacing: 3,
+              ),
+              itemBuilder: (context, index) => NetImage(
+                    width: 107,
+                    height: 107,
+                    imageUrl: nonnullList[index]?.mediumAttachmentUrl ?? '',
+                    radius: 4,
+                  ))
       ],
     );
   }

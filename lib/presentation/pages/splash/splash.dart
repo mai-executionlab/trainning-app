@@ -168,7 +168,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_app/presentation/pages/login/login_page.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
@@ -192,7 +191,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
     _animation.addListener(() {
       setState(() {});
       if (_animation.isCompleted) {
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
           PageRouteBuilder(
             transitionDuration: const Duration(milliseconds: 1000),
             pageBuilder: (BuildContext context, Animation<double> animation,

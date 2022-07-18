@@ -30,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
 
     return Consumer(
       builder: (context, ref, child) {
-    
         ref.listen<AuthState>(
           loginController,
           (preState, state) {
@@ -42,8 +41,8 @@ class _LoginPageState extends State<LoginPage> {
               // Navigator.of(context)
               //     .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
               // }
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => const ProfilePage()));
             } else if (state.status == AuthStatus.processing) {
               showDialog(
                   barrierDismissible: false,
