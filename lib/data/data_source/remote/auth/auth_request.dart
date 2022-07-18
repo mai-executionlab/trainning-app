@@ -1,5 +1,3 @@
-
-
 import 'package:training_app/data/data_source/remote/index.dart';
 
 class AuthRequest {
@@ -15,6 +13,19 @@ class AuthRequest {
         body: {
           'email': email,
           'password': password,
+        },
+      );
+
+  static DioRequest logout({
+    required String refreshToken,
+  }) =>
+      DioRequest(
+        httpMethod: HttpMethod.delete,
+        path: '/logout',
+        body: {
+          "refresh_token": refreshToken,
+          "name": "",
+          "birthday": ""
         },
       );
 }

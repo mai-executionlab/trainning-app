@@ -35,19 +35,20 @@ class LoginNotifier extends StateNotifier<AuthState> {
   final AuthRepositoryImpl repositoryImpl;
 
   void login({required String email, required String pw}) async {
-    // if (email.isEmpty || pw.isEmpty) {
-    //   state = AuthState(message: 'Empty fields', status: AuthStatus.empty);
-    //   return;
-    // }
+    if (email.isEmpty || pw.isEmpty) {
+      state = AuthState(message: 'Empty fields', status: AuthStatus.empty);
+      return;
+    }
     try {
       state = AuthState.processing();
-      // var result = await repositoryImpl.login(email: email, password: pw);
+      var result = await repositoryImpl.login(email: email, password: pw);
       // await Future.delayed(const Duration(seconds: 2));
       // debugPrint(result.object.accessToken);
 
       // save token here
-      // getIt<SharedPref>().token = result.object.accessToken;
-
+      getIt<SharedPref>().token = result.object.accessToken;
+      getIt<SharedPref>().refreshToken = result.object.refreshToken;
+      print(getIt<SharedPref>().refreshToken);
       state = AuthState.success();
       // state = AuthState.fail(message: getIt<SharedPref>().token);
     } catch (e) {
@@ -58,6 +59,7 @@ class LoginNotifier extends StateNotifier<AuthState> {
   }
 }
 
-final loginController = StateNotifierProvider.autoDispose<LoginNotifier, AuthState>((ref) {
+final loginController =
+    StateNotifierProvider.autoDispose<LoginNotifier, AuthState>((ref) {
   return LoginNotifier(repositoryImpl: ref.watch(authRepoProvider));
 });

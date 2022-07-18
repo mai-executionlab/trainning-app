@@ -13,8 +13,8 @@ class DioInterceptor extends Interceptor {
     //need token
     var token = getIt<SharedPref>().token;
     // print('token ${getIt<SharedPref>().token}');
-    token =
-    'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5LCJqdGkiOiIzODlmOWNlNzE0ZWEyOTI5NzQ0NjdmOGNlYjM5NTI2MSIsImlhdCI6MTY1Nzg0NTIyOSwiZXhwIjoxNjU3OTMxNjI5fQ.JrA_SybidP8HDM0kFsaFrmnzmp4EhzVRHLcYOtWQnkU';
+    // token =
+    // 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5LCJqdGkiOiJkYTkwYjk3YTc4ZGU2ZjVhNzgzZDhkZmM4ZTY1ZWI3YiIsImlhdCI6MTY1ODExMTExNiwiZXhwIjoxNjU4MTk3NTE2fQ.HheDF-QAvq0WRJ4AIewnIvNbNj4p-Ub-eSIJIhXZ1TM';
     final RequestOptions newOption = options
       ..headers.addAll(token != null ? {'Authorization': 'Bearer $token'} : {});
 

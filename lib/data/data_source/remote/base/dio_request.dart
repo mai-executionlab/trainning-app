@@ -11,7 +11,7 @@ class DioRequest {
   dynamic body;
 }
 
-enum HttpMethod { get, post, put }
+enum HttpMethod { get, post, put , delete}
 
 // extension HttpMethodsExtension on HttpMethod {
 //   String get method {

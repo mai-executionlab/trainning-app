@@ -22,7 +22,7 @@ class ProfileHeader extends ConsumerWidget {
   // final List<String> currentLanguage;
   @override
   Widget build(BuildContext context, ref) {
-    final GlobalKey<ScaffoldState> globalKey = GlobalKey();
+    
     final currentLanguage = ref.watch(languageController);
     final Account? account = ref.watch(profileHeaderController).data;
     Size size = MediaQuery.of(context).size;
@@ -42,29 +42,6 @@ class ProfileHeader extends ConsumerWidget {
           ),
           Column(
             children: [
-              Container(
-                height: 64,
-                // color: AppColors.lightBlue,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppStyles.horizontalMargin),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // SvgPicture.asset(AppAssets.markColor),
-                    SizedBox(
-                      height: 34,
-                      child: Image.asset(AppAssets.mark),
-                    ),
-                    InkWell(
-                      onTap: () => globalKey.currentState?.openEndDrawer(),
-                      child: SizedBox(
-                        height: 18,
-                        child: SvgPicture.asset(AppAssets.menu),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               const Divider(
                 indent: AppStyles.horizontalMargin,
                 endIndent: AppStyles.horizontalMargin,

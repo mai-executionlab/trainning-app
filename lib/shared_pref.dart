@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPref {
   late final SharedPreferences _preferences;
   final _accessToken = 'accessToken';
+  final _refreshToken = 'refreshToken';
   final _username = 'username';
   Future init() async => _preferences = await SharedPreferences.getInstance();
 
@@ -13,6 +14,12 @@ class SharedPref {
   }
 
   String? get token => _preferences.getString(_accessToken);
+
+  set refreshToken(String? value) {
+    _preferences.setString(_refreshToken, value!);
+  }
+
+  String? get refreshToken => _preferences.getString(_refreshToken);
 
   set username(String? value) {
     _preferences.setString(_username, value!);

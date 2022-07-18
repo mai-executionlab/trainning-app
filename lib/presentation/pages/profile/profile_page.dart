@@ -1,18 +1,24 @@
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:training_app/data/repository_impl/repository_provider.dart';
 import 'package:training_app/domain/entities/entity.dart';
+import 'package:training_app/injection.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/controller.dart';
+import 'package:training_app/presentation/pages/login/login_page.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_activity/profile_activity_controlller.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_photo/profile_photo_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_skill/profile_skill_controlller.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_spot/profile_spot_controller.dart';
-import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 
 import 'package:training_app/presentation/theme/theme.dart';
+import 'package:training_app/shared_pref.dart';
 
 import 'views/profile_home/profile_home_controller.dart';
 
@@ -74,17 +80,7 @@ class ProfilePage extends ConsumerWidget {
       },
     );
     final Account? account = ref.watch(profileHeaderController).data;
-
-    final currentLanguageCode = ref.watch(languageController);
-
     const tabbar = ProfileTab.values;
-
-    // print(account?.nickname);
-
-    const header = ProfileHeader(
-        // account: account ?? Account(),
-        // currentLanguage: currentLanguageCode,
-        );
 
     Widget mapTabView(ProfileTab tab) {
       switch (tab) {
@@ -101,19 +97,85 @@ class ProfilePage extends ConsumerWidget {
       }
     }
 
-    final footer = PreviewFooter(
-      themeColor: account?.getThemeColor,
-    );
+    final GlobalKey<ScaffoldState> globalKey = GlobalKey();
     return DefaultTabController(
       length: tabbar.length,
       child: Scaffold(
+        key: globalKey,
+        endDrawer: Drawer(
+            child: ListView(
+          padding: const EdgeInsets.all(AppStyles.horizontalMargin),
+          children: [
+            CupertinoButton(
+              onPressed: () async {
+                showDialog(
+                    context: context, builder: (_) => const LoadingDialog());
+                ref.read(authRepoProvider).logout().then((value) {
+                  if (value.object == true) {
+                    getIt<SharedPref>().clear();
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (_) => const LoginPage()),
+                        (route) => false);
+                  }
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'ロ グ ア ウ ト',
+                    style:
+                        TextStyles.largeBold.copyWith(color: AppColors.black),
+                  ),
+                  Transform.rotate(
+                      angle: pi,
+                      child: SvgPicture.asset(
+                        AppAssets.leftArrow,
+                        color: AppColors.secondaryColor,
+                      ))
+                ],
+              ),
+            ),
+          ],
+        )),
         backgroundColor: AppColors.white,
         body: SafeArea(
           child: Consumer(builder: (context, ref, child) {
             // can be switch only main section but not save offset of list
-            return IndexedStack(
-              index: ref.watch(tabController),
-              children: tabbar.map((tab) => mapTabView(tab)).toList(),
+            return Column(
+              children: [
+                Container(
+                  height: 64,
+                  color: account?.getThemeColor == null
+                      ? AppColors.lightBlue
+                      : Color(account!.getThemeColor!),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppStyles.horizontalMargin),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // SvgPicture.asset(AppAssets.markColor),
+                      SizedBox(
+                        height: 34,
+                        child: Image.asset(AppAssets.mark),
+                      ),
+                      InkWell(
+                        onTap: () => globalKey.currentState?.openEndDrawer(),
+                        child: SizedBox(
+                          height: 18,
+                          child: SvgPicture.asset(AppAssets.menu),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: IndexedStack(
+                    index: ref.watch(tabController),
+                    children: tabbar.map((tab) => mapTabView(tab)).toList(),
+                  ),
+                ),
+              ],
             );
           }),
         ),

@@ -13,4 +13,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) =>
       _authService.login(email: email, password: password);
+
+  @override
+  Future<ObjectResponse<bool>> logout() => _authService.logout();
 }
