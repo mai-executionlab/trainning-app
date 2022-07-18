@@ -19,7 +19,7 @@ extension MediaTypeExtension on MediaType {
   }
 }
 
-final photoTypeController = StateProvider<MediaType?>((ref) {
+final photoTypeController = StateProvider.autoDispose<MediaType?>((ref) {
   return null;
 });
 

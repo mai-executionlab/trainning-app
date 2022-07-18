@@ -8,6 +8,7 @@ import 'package:training_app/presentation/pages/profile/profile_controller.dart'
 import 'package:training_app/presentation/pages/profile_edit/views/index.dart';
 import 'package:training_app/presentation/pages/profile_edit/views/profile_edit/profile_edit_controller.dart';
 import 'package:training_app/presentation/theme/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileHeader extends ConsumerWidget {
   const ProfileHeader({
@@ -22,7 +23,6 @@ class ProfileHeader extends ConsumerWidget {
   // final List<String> currentLanguage;
   @override
   Widget build(BuildContext context, ref) {
-    
     final currentLanguage = ref.watch(languageController);
     final Account? account = ref.watch(profileHeaderController).data;
     Size size = MediaQuery.of(context).size;
@@ -145,7 +145,7 @@ class ProfileHeader extends ConsumerWidget {
                                       builder: (_) => const ProfileEdit()));
 
                               if (result == true) {
-                                print('reload');
+        
                                 ref
                                     .read(profileHeaderController.notifier)
                                     .init();
@@ -163,7 +163,8 @@ class ProfileHeader extends ConsumerWidget {
                               width: 6,
                             ),
                             Text(
-                              'プロフィール編集',
+                              // 'プロフィール編集',
+                              AppLocalizations.of(context)!.editProfile,
                               style: TextStyles.smallRegular.copyWith(
                                   color: AppColors.black33, height: 1),
                             )

@@ -1,0 +1,26 @@
+{
+    "editProfile": "プロフィール編集",
+    "home":"ホーム",
+    "spot":"観光地",
+    "skill":"スキル",
+    "activity":"活動",
+    "photo":"写真",
+    "spotTitle": "案内できる観光地",
+    "activityTitle":"最近の活動",
+    "skillTitle":"スキル",
+    "photoTitle":"写真",
+
+    "skillBeginner": "初心者",
+    "skillElementary": "小学校",
+    "skillAdvanced": "高度",
+    "skillImediately": "中級",
+    "skillExpert": "エキスパート",
+    "skillPoint":"点",
+
+    "skillDomesticBManager":"旅行業務取扱管理者（国内)",
+    "skillGeneralBManager":"旅行業務取扱管理者（総合)",
+    "skillTourismEnglish":"観光英語検定",
+    "skillTravelGeo":"旅行地理検定",
+    "skillWorldHeritage":"世界遺産検定",
+    "skillOthers":"その他の資格"
+}

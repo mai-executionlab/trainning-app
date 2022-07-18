@@ -8,6 +8,7 @@ import 'package:training_app/presentation/pages/profile/views/profile_photo/prof
 import 'package:training_app/presentation/pages/profile/widgets/album_item.dart';
 import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
 import 'package:training_app/presentation/theme/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileMedia extends ConsumerWidget {
   const ProfileMedia({Key? key}) : super(key: key);
@@ -34,7 +35,8 @@ class ProfileMedia extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      '写真',
+                      // '写真',
+                      AppLocalizations.of(context)!.photoTitle,
                       style: TextStyles.extraLargeBold,
                     ),
                   ),
