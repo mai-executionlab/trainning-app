@@ -38,20 +38,6 @@ enum ProfileTab {
 }
 
 extension ProfileTabExtension on ProfileTab {
-  String get tabName {
-    switch (this) {
-      case ProfileTab.home:
-        return 'ホーム';
-      case ProfileTab.spot:
-        return '観光地';
-      case ProfileTab.skill:
-        return 'スキル';
-      case ProfileTab.activity:
-        return '活動';
-      case ProfileTab.photo:
-        return '写真';
-    }
-  }
 
   String get tabIcon {
     switch (this) {
@@ -69,21 +55,6 @@ extension ProfileTabExtension on ProfileTab {
   }
 }
 
-// final accountController = FutureProvider((ref) async {
-//   print('future account');
-//   return await ref.watch(guideRepoProvider).getUserDetailInfor();
-// });
-
-final tabHomeController =
-    FutureProvider.family<ObjectResponse<GeneralInformation>, List<String?>>(
-  (ref, args) async {
-    return await ref.watch(guideRepoProvider).getUserGeneralInfor(
-          username: args[0] ?? '',
-          primaryLanguage: args[1] ?? 'ja',
-          secondLanguage: args[2] ?? 'en',
-        );
-  },
-);
 
 class ProfileHeaderNotifier extends StateNotifier<PageStatus<Account>> {
   final GuideRepositoryImpl repositoryImpl;
@@ -93,7 +64,7 @@ class ProfileHeaderNotifier extends StateNotifier<PageStatus<Account>> {
 
   Future init() async {
     state = PageStatus(PageState.loading);
-    var result = await repositoryImpl.getUserDetailInfor();
+    var result = await repositoryImpl.getUserDetailInfor();// get username only
     // Account account = result.object;
 
     var result2 = await repositoryImpl.getUserShortInfor(
@@ -107,5 +78,5 @@ class ProfileHeaderNotifier extends StateNotifier<PageStatus<Account>> {
 }
 
 final profileHeaderController =
-    StateNotifierProvider<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
+    StateNotifierProvider.autoDispose<ProfileHeaderNotifier, PageStatus<Account>>((ref) =>
         ProfileHeaderNotifier(repositoryImpl: ref.watch(guideRepoProvider)));

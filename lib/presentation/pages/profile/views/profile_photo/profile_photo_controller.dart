@@ -23,29 +23,6 @@ final photoTypeController = StateProvider.autoDispose<MediaType?>((ref) {
   return null;
 });
 
-// class AlbumMediaNotifier extends StateNotifier<PageStatus<List<MapEntry<int?,List<Media?>>>>> {
-//   AlbumMediaNotifier({
-//     required this.repositoryImpl,
-//   }) : super(PageStatus<List<MapEntry<int?, List<Media?>>>>(PageState.init, data: []));
-
-//   final GuideRepositoryImpl repositoryImpl;
-
-//   final _page = 1;
-
-//   Future init({
-//     required String username,
-//   }) async {
-//     state = state.copyWith(PageState.loading);
-//     var result =
-//         await repositoryImpl.getUserAlbums(username: username, page: _page);
-//     List<MapEntry<int?, List<Media?>>> list =
-//         groupBy<Media?, int?>(result.list, (e) => e?.id).entries.toList();
-//     // print(list[0].value.length);
-//     // list.entries.
-//     state = PageStatus(PageState.loaded, data: list);
-//   }
-// }
-
 class AlbumMediaNotifier extends StateNotifier<PageStatus<List<Media?>>> {
   AlbumMediaNotifier({
     required this.repositoryImpl,
@@ -61,10 +38,7 @@ class AlbumMediaNotifier extends StateNotifier<PageStatus<List<Media?>>> {
     state = state.copyWith(PageState.loading);
     var result =
         await repositoryImpl.getUserAlbums(username: username, page: _page);
-    // List<MapEntry<int?, List<Media?>>> list =
-    //     groupBy<Media?, int?>(result.list, (e) => e?.id).entries.toList();
-    // print(list[0].value.length);
-    // list.entries.
+
     state = PageStatus(PageState.loaded, data: result.list);
   }
 
@@ -103,15 +77,10 @@ class DateMediaNotifier extends StateNotifier<PageStatus<List<Media?>>> {
     state = state.copyWith(PageState.loading);
     var result =
         await repositoryImpl.getUserMedium(username: username, page: _page);
-    // List<MapEntry<int?, List<Media?>>> list =
-    //     groupBy<Media?, int?>(result.list, (e) => e?.id).entries.toList();
-    // print(list[0].value.length);
-    // list.entries.
+
     state = PageStatus(PageState.loaded, data: result.list);
   }
 
-  // List<MapEntry<int?, List<Media?>>> sortByAlbums() =>
-  //     groupBy<Media?, int?>(state.data ?? [], (e) => e?.id).entries.toList();
 
   List<MapEntry<String?, List<Media?>>> sortByTime() =>
       groupBy<Media?, String?>(state.data ?? [], (e) => e?.timeline);

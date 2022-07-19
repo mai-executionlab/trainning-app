@@ -28,13 +28,8 @@ class _SplashState extends ConsumerState<Splash> with TickerProviderStateMixin {
     _animation.addListener(() {
       setState(() {});
       if (_animation.isCompleted) {
-        print(getIt<SharedPref>().token);
-        if ((getIt<SharedPref>().expireAt ?? 0) <
-            DateTime.now().millisecondsSinceEpoch) {
-          //refresh token
-          print('expired');
-        }
-        if (getIt<SharedPref>().token != null && (getIt<SharedPref>().expireAt ?? 0) <
+        if (getIt<SharedPref>().token != null &&
+            (getIt<SharedPref>().expireAt ?? 0) <
                 DateTime.now().millisecondsSinceEpoch) {
           ref.read(profileHeaderController.notifier).init();
           Navigator.of(context).pushAndRemoveUntil(
@@ -68,7 +63,6 @@ class _SplashState extends ConsumerState<Splash> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    
     super.initState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
@@ -104,7 +98,6 @@ class _SplashState extends ConsumerState<Splash> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    
     _animationController.dispose();
     _logoController.dispose();
     super.dispose();
