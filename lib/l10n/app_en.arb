@@ -1,0 +1,26 @@
+{
+    "editProfile": "Profile Edit",
+    "home":"Home",
+    "spot":"Spot",
+    "skill":"Skill",
+    "activity":"Activity",
+    "photo":"Photo",
+    "spotTitle": "Tour Destinations",
+    "activityTitle":"Recent Activities",
+    "skillTitle":"Skill",
+    "photoTitle":"Photo",
+
+    "skillBeginner": "Beginner",
+    "skillElementary": "Elementary",
+    "skillAdvanced": "Advanced",
+    "skillImediately": "Imediately",
+    "skillExpert": "Expert",
+    "skillPoint":"point",
+
+    "skillDomesticBManager":"Travel business handling manager (domestic)",
+    "skillGeneralBManager":"Travel business handling manager (general)",
+    "skillTourismEnglish":"Tourism English test",
+    "skillTravelGeo":"Travel Geography test",
+    "skillWorldHeritage":"World Heritage test",
+    "skillOthers":"Other qualifications"
+}

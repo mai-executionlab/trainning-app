@@ -42,7 +42,6 @@ class LoginNotifier extends StateNotifier<AuthState> {
     try {
       state = AuthState.processing();
       var result = await repositoryImpl.login(email: email, password: pw);
-      // await Future.delayed(const Duration(seconds: 2));
       // debugPrint(result.object.accessToken);
 
       // save token here
@@ -50,6 +49,7 @@ class LoginNotifier extends StateNotifier<AuthState> {
       getIt<SharedPref>().refreshToken = result.object.refreshToken;
       getIt<SharedPref>().expireAt = result.object.expireAt;
       print(getIt<SharedPref>().refreshToken);
+
       state = AuthState.success();
       // state = AuthState.fail(message: getIt<SharedPref>().token);
     } catch (e) {

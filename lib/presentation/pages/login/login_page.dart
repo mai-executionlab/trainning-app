@@ -41,8 +41,9 @@ class _LoginPageState extends State<LoginPage> {
               // Navigator.of(context)
               //     .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
               // }
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => const ProfilePage()));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => const ProfilePage()),
+                  (route) => false);
             } else if (state.status == AuthStatus.processing) {
               showDialog(
                   barrierDismissible: false,

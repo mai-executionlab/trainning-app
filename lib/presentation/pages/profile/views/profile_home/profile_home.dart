@@ -22,7 +22,7 @@ class ProfileHome extends ConsumerWidget {
     final GeneralInformation? generalInfor = ref.watch(profileHomeController);
     ref.watch(profileHomeController.notifier).repositoryImpl;
     final currentLanguageCode = ref.watch(languageController);
-    print(generalInfor?.travelOrganization);
+
     Widget matchItem(GeneralInfor infor) {
       switch (infor.inputType) {
         case 'image':

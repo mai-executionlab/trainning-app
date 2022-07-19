@@ -5,8 +5,8 @@ import 'package:training_app/domain/entities/destination.dart';
 import 'package:training_app/presentation/components/components.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/profile_spot/profile_spot_controller.dart';
-import 'package:training_app/presentation/pages/profile/widgets/profile_header.dart';
-import 'package:training_app/presentation/pages/profile/widgets/spot_item.dart';
+import 'package:training_app/presentation/pages/profile/widgets/index.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
 class ProfileSpot extends ConsumerWidget {
@@ -32,7 +32,8 @@ class ProfileSpot extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      '案内できる観光地',
+                      // '案内できる観光地',
+                      AppLocalizations.of(context)!.spotTitle,
                       style: TextStyles.extraLargeBold,
                     ),
                   ),
@@ -55,9 +56,8 @@ class ProfileSpot extends ConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => SpotItem(
                   img: list?[index].imgUrl,
-                  location:
-                      list?[index].area?.name?[currentLanguageCode[0]] ??
-                          list?[index].area?.name?['en'],
+                  location: list?[index].area?.name?[currentLanguageCode[0]] ??
+                      list?[index].area?.name?['en'],
                   title: list?[index].name?[currentLanguageCode[0]],
                   content: list?[index].description?[currentLanguageCode[0]],
                 ),

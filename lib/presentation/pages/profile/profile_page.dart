@@ -12,15 +12,11 @@ import 'package:training_app/presentation/pages/controller.dart';
 import 'package:training_app/presentation/pages/login/login_page.dart';
 import 'package:training_app/presentation/pages/profile/profile_controller.dart';
 import 'package:training_app/presentation/pages/profile/views/index.dart';
-import 'package:training_app/presentation/pages/profile/views/profile_activity/profile_activity_controlller.dart';
-import 'package:training_app/presentation/pages/profile/views/profile_photo/profile_photo_controller.dart';
-import 'package:training_app/presentation/pages/profile/views/profile_skill/profile_skill_controlller.dart';
-import 'package:training_app/presentation/pages/profile/views/profile_spot/profile_spot_controller.dart';
 
 import 'package:training_app/presentation/theme/theme.dart';
 import 'package:training_app/shared_pref.dart';
 
-import 'views/profile_home/profile_home_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -57,25 +53,6 @@ class ProfilePage extends ConsumerWidget {
                 secondLanguage: language2),
           ]);
           ref.read(photoTypeController.state).state = MediaType.byDate;
-
-          // GuideService guideService =
-          //     GuideService(dioClient: ref.watch(dioProvider));
-          // // guideService.getUserSkills(
-          // //     username: 'hang', primaryLanguage: 'ja', secondLanguage: 'en');
-          // guideService.getUserAlbums(username: 'hang', page: 1);
-          // // guideService.getUserDestinations(
-          // //     username: 'hang',
-          // //     primaryLanguage: 'ja',
-          // //     secondLanguage: 'en',
-          // //     page: 1);
-          // guideService.getUserActivities(
-          //     username: 'hang',
-          //     primaryLanguage: 'ja',
-          //     secondLanguage: 'en',
-          //     page: 1);
-          if (next.state == PageState.loading) {
-            print('check $previous');
-          }
         }
       },
     );
@@ -94,6 +71,21 @@ class ProfilePage extends ConsumerWidget {
           return const ProfileActivity();
         case ProfileTab.photo:
           return const ProfileMedia();
+      }
+    }
+
+    String tabTitle(ProfileTab tab) {
+      switch (tab) {
+        case ProfileTab.home:
+          return AppLocalizations.of(context)!.home;
+        case ProfileTab.spot:
+          return AppLocalizations.of(context)!.spot;
+        case ProfileTab.skill:
+          return AppLocalizations.of(context)!.skill;
+        case ProfileTab.activity:
+          return AppLocalizations.of(context)!.activity;
+        case ProfileTab.photo:
+          return AppLocalizations.of(context)!.photo;
       }
     }
 
@@ -124,7 +116,7 @@ class ProfilePage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'ロ グ ア ウ ト',
+                    'ログアウト',
                     style:
                         TextStyles.largeBold.copyWith(color: AppColors.black),
                   ),
@@ -204,7 +196,7 @@ class ProfilePage extends ConsumerWidget {
                   unselectedLabelColor: AppColors.customizeFG.withOpacity(0.5),
                   tabs: tabbar
                       .map((tab) => Tab(
-                            text: tab.tabName,
+                            text: tabTitle(tab),
                             iconMargin: const EdgeInsets.only(bottom: 5),
                             // icon: Icon(Icons.abc),
                             icon: SvgPicture.asset(

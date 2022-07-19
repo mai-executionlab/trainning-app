@@ -8,6 +8,8 @@ import 'package:training_app/presentation/pages/profile/widgets/profile_header.d
 import 'package:training_app/presentation/pages/profile/widgets/skill_item.dart';
 import 'package:training_app/presentation/theme/theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfileSkill extends ConsumerWidget {
   const ProfileSkill({Key? key}) : super(key: key);
 
@@ -16,11 +18,11 @@ class ProfileSkill extends ConsumerWidget {
     var data = ref.watch(profileSkillController).data;
     var currentLanguage = ref.watch(languageController);
     Map<String, String> degree = {
-      "beginner": "初心者",
-      "elementary": "小学校",
-      "advanced": "高度",
-      "imediately": "中級",
-      "expert": "エキスパート",
+      "beginner": AppLocalizations.of(context)!.skillBeginner,
+      "elementary": AppLocalizations.of(context)!.skillElementary,
+      "advanced": AppLocalizations.of(context)!.skillAdvanced,
+      "imediately": AppLocalizations.of(context)!.skillImediately,
+      "expert": AppLocalizations.of(context)!.skillExpert,
     };
     return ListView(
       children: [
@@ -36,7 +38,8 @@ class ProfileSkill extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'スキル',
+                      // 'スキル',
+                      AppLocalizations.of(context)!.skillTitle,
                       style: TextStyles.extraLargeBold,
                     ),
                   ),
@@ -55,35 +58,36 @@ class ProfileSkill extends ConsumerWidget {
               ),
               const SizedBox(height: 25),
               if (data?.domesticBManager == true)
-                const SkillItem(
-                  title: '旅行業務取扱管理者（国内)',
+                SkillItem(
+                  title: AppLocalizations.of(context)!.skillDomesticBManager,
                 ),
               if (data?.generalBManager == true)
-                const SkillItem(
-                  title: '旅行業務取扱管理者（総合)',
+                SkillItem(
+                  title: AppLocalizations.of(context)!.skillGeneralBManager,
                 ),
               if (data?.toeic != null)
                 SkillItem(
                   title: 'TOEIC',
-                  level: '${data?.toeic} 点',
+                  level:
+                      '${data?.toeic} ${AppLocalizations.of(context)!.skillPoint}',
                 ),
               if (data?.tourismEnglish == true)
-                const SkillItem(
-                  title: '観光英語検定',
+                SkillItem(
+                  title: AppLocalizations.of(context)!.skillTourismEnglish,
                 ),
               if (data?.travelGeography != null)
                 SkillItem(
-                  title: '旅行地理検定',
+                  title: AppLocalizations.of(context)!.skillTravelGeo,
                   level: degree[data?.travelGeography],
                 ),
               if (data?.worldHeritage == true)
-                const SkillItem(
-                  title: '世界遺産検定',
+                SkillItem(
+                  title: AppLocalizations.of(context)!.skillWorldHeritage,
                 ),
               if (data?.otherDegrees?[currentLanguage[0]] != null &&
                   data!.otherDegrees![currentLanguage[0]]!.isNotEmpty)
-                const SkillItem(
-                  title: 'その他の資格',
+                SkillItem(
+                  title: AppLocalizations.of(context)!.skillOthers,
                 ),
               ListView.separated(
                 shrinkWrap: true,

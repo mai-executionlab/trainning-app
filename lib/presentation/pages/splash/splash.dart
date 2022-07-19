@@ -68,6 +68,7 @@ class _SplashState extends ConsumerState<Splash> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    
     super.initState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
@@ -103,6 +104,7 @@ class _SplashState extends ConsumerState<Splash> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    
     _animationController.dispose();
     _logoController.dispose();
     super.dispose();
