@@ -48,6 +48,7 @@ class LoginNotifier extends StateNotifier<AuthState> {
       // save token here
       getIt<SharedPref>().token = result.object.accessToken;
       getIt<SharedPref>().refreshToken = result.object.refreshToken;
+      getIt<SharedPref>().expireAt = result.object.expireAt;
       print(getIt<SharedPref>().refreshToken);
       state = AuthState.success();
       // state = AuthState.fail(message: getIt<SharedPref>().token);

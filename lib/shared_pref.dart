@@ -7,8 +7,13 @@ class SharedPref {
   final _accessToken = 'accessToken';
   final _refreshToken = 'refreshToken';
   final _username = 'username';
+  final _expireAt = 'expire_at';
   Future init() async => _preferences = await SharedPreferences.getInstance();
+  set expireAt(int? value) {
+    _preferences.setInt(_expireAt, value!);
+  }
 
+  int? get expireAt => _preferences.getInt(_expireAt);
   set token(String? value) {
     _preferences.setString(_accessToken, value!);
   }
